@@ -6,7 +6,7 @@ O objetivo é criar um sistema simples para um supermercado, estoque, atendiment
 ## Author
 
 * **Daniel Franco** 
-* **Marian Vale** 
+* **Mariana Vale** 
 * **Renan Souza** 
 * **Rodrigo Costa** 
 
