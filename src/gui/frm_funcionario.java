@@ -99,6 +99,35 @@ public class frm_funcionario extends javax.swing.JFrame {
         } 
     }
     
+    // Método excluir - exclui um registro
+    public void excluir(){
+        try {
+            // Busca no banco o registro atual
+            banco.executeSQL("select * from funcionario where id_fun = " + lbl_id.getText());
+            banco.resultset.first();
+            
+            // Mensagem ao usuário para confirma a exclusão
+            String mensagem = "Tem certeza que deseja excluir o funcionário?\n" + banco.resultset.getString(3) + "\nCPF: " + banco.resultset.getString(4);
+            
+            // Verifica se o usuário clicou no SIM e deleta o funcionário, se não, faz NADA
+            if (JOptionPane.showConfirmDialog(null, mensagem, "Excluir funcionário?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                
+                // Exclui o funcionário e se der certo, exibe uma mensagem ao usuário
+                if (banco.statement.executeUpdate("delete from funcionario where id_fun = " + lbl_id.getText()) == 1){
+                    JOptionPane.showMessageDialog(null, "O funcionário foi excluído com sucesso.");
+                    
+                    // Mostra o primeiro registro novamente                        
+                    banco.executeSQL(sql);
+                    banco.resultset.first();
+                    exibir_dados();
+                }                
+            }    
+        }
+        catch (SQLException e){            
+            JOptionPane.showMessageDialog(null, "Erro ao excluir registro!\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -125,6 +154,7 @@ public class frm_funcionario extends javax.swing.JFrame {
         lbl_tipo = new javax.swing.JLabel();
         txt_tipo = new javax.swing.JTextField();
         lbl_estado_civil = new javax.swing.JLabel();
+        btn_excluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +201,13 @@ public class frm_funcionario extends javax.swing.JFrame {
 
         lbl_estado_civil.setText("Estado Civil");
 
+        btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,7 +250,10 @@ public class frm_funcionario extends javax.swing.JFrame {
                                 .addComponent(lbl_salario)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_salario, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btn_salvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(273, 273, 273)
                         .addComponent(lbl_titulo)))
@@ -262,7 +302,9 @@ public class frm_funcionario extends javax.swing.JFrame {
                     .addComponent(txt_estado_civil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -281,9 +323,10 @@ public class frm_funcionario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_tipoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -317,6 +360,7 @@ public class frm_funcionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_salvar;
     private javax.swing.JLabel lbl_codigo;
     private javax.swing.JLabel lbl_cpf;
