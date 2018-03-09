@@ -11,39 +11,32 @@ public class Banco {
     final private String url = "jdbc:mysql://localhost:3306/projeto_mercado";
     final private String driver = "com.mysql.jdbc.Driver";
     final private String user = "root";
-    final private String password = "ksdhfsfkgsdfj";
+    final private String password = "root";
     private Connection connection;
     public Statement statement;
     public ResultSet resultset;   
     
     // Método para criar uma conexão com o banco
-    public boolean connect(){     
-        boolean result = true;
-            try {                
-                Class.forName(driver);
-                connection = DriverManager.getConnection(url, user, password); 
-                System.out.println("AMZN is ONLINE");
-            }
-            catch(ClassNotFoundException e){                
-                JOptionPane.showMessageDialog(null, "Erro! Driver de conexão não foi encontrando\n" + e);
-                result = false;                
-            }
-            catch (SQLException e){                
-                JOptionPane.showMessageDialog(null, "Erro na conexão com o banco de dados\n" + e);
-                result = false;                
-            }            
-        return(result);        
+    public void connect(){     
+        try {                
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url, user, password); 
+        }
+        catch(ClassNotFoundException e){                
+            JOptionPane.showMessageDialog(null, "Erro! Driver de conexão não foi encontrando\n" + e);               
+        }
+        catch (SQLException e){                
+            JOptionPane.showMessageDialog(null, "Erro na conexão com o banco de dados\n" + e);               
+        }              
     }    
     
     // Método para fechar uma conexão com o banco
-    public void disconnect(){        
-        boolean result = true;        
+    public void disconnect(){               
         try {            
             connection.close();                       
         }        
         catch(SQLException SQLerror){
-            JOptionPane.showMessageDialog(null,"Erro ao fechar a conexão com o banco de dados\n"+ SQLerror.getMessage());
-            result = false;            
+            JOptionPane.showMessageDialog(null,"Erro ao fechar a conexão com o banco de dados\n"+ SQLerror.getMessage());          
         }       
     }  
     
