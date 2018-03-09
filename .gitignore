@@ -6,6 +6,9 @@
 # How to add a global .gitignore file
 # git config --global core.excludesfile ~/Documents/github/gitignore
 
+# Build folders
+build/
+
 # Compiled source #
 ###################
 *.com
