@@ -1,46 +1,49 @@
 package gui;
 
- // Importando bibliotecas
+// Importando bibliotecas
 import java.sql.*;
 import database.Banco;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class frm_funcionario extends javax.swing.JFrame {
 
-        // Instancia da classe de Conexão
+    // Instancia da classe de Conexão
     Banco banco;
-    
+
     // controlar erro de navegacao nos botoes proximo e anterior
     int navega = 0;
-    
+
     // select principal
     String sql = "select * from funcionario";
 
     // Construtor
     public frm_funcionario() {
         initComponents();
-        
+         setLocationRelativeTo(null);
+
         // Criando objeto da classe Banco
         banco = new Banco();
-        
+
         // Abrir conexão com o banco de dados
         banco.connect();
-        
+
         // Carregar dados
         banco.executeSQL(sql);
-        try{
+        
+        try {
             // Procura o primeiro registro no banco
             banco.resultset.first();
             exibir_dados();
-        }
-        catch (SQLException e){            
-            JOptionPane.showMessageDialog(null,"Erro ao acessar dados\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     // Método exibir_dados - mostra os dados na tela
     public void exibir_dados() {
-        try{
+        try {
             lbl_id.setText(banco.resultset.getString(1)); // Código
             txt_tipo.setText(banco.resultset.getString(2)); // Tipo Funcionário
             txt_nome.setText(banco.resultset.getString(3)); // Nome
@@ -51,23 +54,20 @@ public class frm_funcionario extends javax.swing.JFrame {
             txt_telefone.setText(banco.resultset.getString(8)); // Telefone
             txt_estado_civil.setText(banco.resultset.getString(9)); // Estado Civil
             txt_salario.setText(banco.resultset.getString(10)); // Salário
-        }
-        catch (SQLException e){            
-            if (navega == 1){ 
-                JOptionPane.showMessageDialog(null,"Erro!\nVocê já está no primeiro registro.\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);                
-            }
-            else if (navega == 2){                
-                JOptionPane.showMessageDialog(null,"Erro!\nVocê já está no último registro.\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);                
-            }
-            else {                
-                JOptionPane.showMessageDialog(null,"Erro ao acessar dados\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            if (navega == 1) {
+                JOptionPane.showMessageDialog(null, "Erro!\nVocê já está no primeiro registro.\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else if (navega == 2) {
+                JOptionPane.showMessageDialog(null, "Erro!\nVocê já está no último registro.\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
                 navega = 0;
             }
         }
     }
-    
+
     // Método salvar - cria um novo registro
-    public void salvar(){
+    public void salvar() {
         try {
             // Guardar informações da tela em variáveis
             String tipo = txt_tipo.getText();
@@ -79,55 +79,114 @@ public class frm_funcionario extends javax.swing.JFrame {
             String telefone = txt_telefone.getText();
             String estado_civil = txt_estado_civil.getText();
             double salario = Double.parseDouble(txt_salario.getText());
-            
+
             // Comando SQL
             String comando = "insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values "
-            + "("+tipo+", '"+nome+"', '"+cpf+"', '"+endereco+"', '"+data_nascto+"', '"+funcao+"', '"+telefone+"', '"+estado_civil+"', "+salario+")";
-            
+                    + "(" + tipo + ", '" + nome + "', '" + cpf + "', '" + endereco + "', '" + data_nascto + "', '" + funcao + "', '" + telefone + "', '" + estado_civil + "', " + salario + ")";
+
             // Executar comando SQL
             banco.statement.executeUpdate(comando);
-            JOptionPane.showMessageDialog(null, "Informações salvas com sucesso.","Pronto",JOptionPane.OK_OPTION);
-            
+            JOptionPane.showMessageDialog(null, "Informações salvas com sucesso.", "Pronto", JOptionPane.OK_OPTION);
+
             // Mostra o primeiro registro novamente  
             banco.executeSQL(sql);
-            banco.resultset.first();            
+            banco.resultset.first();
             exibir_dados();
-            
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            System.out.println("erro" +e);
         }
-        catch (SQLException e){            
-            JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
-        } 
     }
-    
+
     // Método excluir - exclui um registro
-    public void excluir(){
+    public void excluir() {
         try {
             // Busca no banco o registro atual
             banco.executeSQL("select * from funcionario where id_fun = " + lbl_id.getText());
             banco.resultset.first();
-            
+
             // Mensagem ao usuário para confirma a exclusão
             String mensagem = "Tem certeza que deseja excluir o funcionário?\n" + banco.resultset.getString(3) + "\nCPF: " + banco.resultset.getString(4);
-            
+
             // Verifica se o usuário clicou no SIM e deleta o funcionário, se não, faz NADA
-            if (JOptionPane.showConfirmDialog(null, mensagem, "Excluir funcionário?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-                
+            if (JOptionPane.showConfirmDialog(null, mensagem, "Excluir funcionário?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
                 // Exclui o funcionário e se der certo, exibe uma mensagem ao usuário
-                if (banco.statement.executeUpdate("delete from funcionario where id_fun = " + lbl_id.getText()) == 1){
+                if (banco.statement.executeUpdate("delete from funcionario where id_fun = " + lbl_id.getText()) == 1) {
                     JOptionPane.showMessageDialog(null, "O funcionário foi excluído com sucesso.");
-                    
+
                     // Mostra o primeiro registro novamente                        
                     banco.executeSQL(sql);
                     banco.resultset.first();
                     exibir_dados();
-                }                
-            }    
-        }
-        catch (SQLException e){            
-            JOptionPane.showMessageDialog(null, "Erro ao excluir registro!\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir registro!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void update() {
+
+        try{ // Atribui os valores digitado pelo usuário em uma variável
+            String id =lbl_id.getText();
+            String nome = txt_nome.getText();
+            String cpf = txt_cpf.getText();
+            String endereco = txt_endereco.getText();
+            String data_nascto = txt_data_nascto.getText();
+            String funcao = txt_funcao.getText();
+            String telefone = txt_telefone.getText();
+            String estado_civil = txt_estado_civil.getText();
+            String salario = txt_salario.getText();
+            
+            //Comando SQL
+            String comando = "update funcionario "
+                    + " set nome_fun = '"+nome+"',"
+                    + " cpf_fun = "+cpf+","
+                    + " endereco_fun = '"+endereco+"',"
+                    + " data_nascto_fun = '"+data_nascto+"',"
+                    + " funcao_fun = '"+funcao+"',"
+                    + " telefone_fun ="+telefone+","
+                    + " estado_civil_fun ='"+estado_civil+"',"
+                    + " salario_fun= "+salario+""
+                    + " where id_fun ="+id;
+            
+           // Executar comando SQL
+            banco.statement.executeUpdate(comando);
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!\n" );
+            
+            // Mostra o primeiro registro novamente  
+            banco.executeSQL(sql);
+            banco.resultset.first();
+            exibir_dados();
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Deu ruim parceiro!\n" + e, "Xii!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+//------------------------------------------------------------------------------**************************
+    //Método
+    public void listar_prox() {
+        
+        try {     
+        banco.resultset.next();
+            exibir_dados();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        } 
+    } 
     
+    public void listar_ant(){
+        
+        try {     
+        banco.resultset.previous();
+            exibir_dados();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        } 
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,6 +214,10 @@ public class frm_funcionario extends javax.swing.JFrame {
         txt_tipo = new javax.swing.JTextField();
         lbl_estado_civil = new javax.swing.JLabel();
         btn_excluir = new javax.swing.JButton();
+        btn_anterior = new javax.swing.JButton();
+        btn_proximo = new javax.swing.JButton();
+        btn_alterar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,6 +271,31 @@ public class frm_funcionario extends javax.swing.JFrame {
             }
         });
 
+        btn_anterior.setText("Anterior");
+        btn_anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anteriorActionPerformed(evt);
+            }
+        });
+
+        btn_proximo.setText("Próximo");
+        btn_proximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_proximoActionPerformed(evt);
+            }
+        });
+
+        btn_alterar.setText("Alterar");
+        btn_alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alterarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Listar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,7 +304,7 @@ public class frm_funcionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_nome)
@@ -251,6 +339,18 @@ public class frm_funcionario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_salario, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btn_anterior)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btn_proximo)
+                                        .addGap(72, 72, 72))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -301,11 +401,23 @@ public class frm_funcionario extends javax.swing.JFrame {
                     .addComponent(lbl_salario)
                     .addComponent(txt_estado_civil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_proximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_anterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         pack();
@@ -326,6 +438,21 @@ public class frm_funcionario extends javax.swing.JFrame {
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
         excluir();
     }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
+        
+        listar_ant();
+   
+    }//GEN-LAST:event_btn_anteriorActionPerformed
+
+    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
+        update();
+    }//GEN-LAST:event_btn_alterarActionPerformed
+
+    private void btn_proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proximoActionPerformed
+        
+        listar_prox();
+    }//GEN-LAST:event_btn_proximoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -354,14 +481,20 @@ public class frm_funcionario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new frm_funcionario().setVisible(true);
+               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_alterar;
+    private javax.swing.JButton btn_anterior;
     private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_proximo;
     private javax.swing.JButton btn_salvar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl_codigo;
     private javax.swing.JLabel lbl_cpf;
     private javax.swing.JLabel lbl_data_nascto;
