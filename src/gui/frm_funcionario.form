@@ -69,6 +69,8 @@
                               <Component id="txt_salario" min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="btn_alterar" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_excluir" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_salvar" min="-2" pref="86" max="-2" attributes="0"/>
@@ -137,8 +139,11 @@
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btn_excluir" max="32767" attributes="0"/>
-                  <Component id="btn_salvar" pref="56" max="32767" attributes="0"/>
+                  <Component id="btn_alterar" pref="56" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btn_excluir" max="32767" attributes="0"/>
+                      <Component id="btn_salvar" pref="56" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -244,6 +249,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_excluirActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_alterar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Alterar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
