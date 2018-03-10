@@ -69,6 +69,7 @@
                               <Component id="txt_salario" min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+<<<<<<< HEAD
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="btn_anterior" min="-2" max="-2" attributes="0"/>
@@ -83,6 +84,9 @@
                                   </Group>
                               </Group>
                               <Component id="btn_alterar" min="-2" pref="80" max="-2" attributes="0"/>
+=======
+                              <Component id="btn_alterar" min="-2" pref="114" max="-2" attributes="0"/>
+>>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_excluir" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -150,6 +154,7 @@
                   <Component id="txt_estado_civil" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_salario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -170,6 +175,14 @@
                           <Component id="btn_proximo" alignment="1" max="32767" attributes="0"/>
                           <Component id="btn_anterior" alignment="1" max="32767" attributes="0"/>
                       </Group>
+=======
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btn_alterar" pref="56" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btn_excluir" max="32767" attributes="0"/>
+                      <Component id="btn_salvar" pref="56" max="32767" attributes="0"/>
+>>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -278,6 +291,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_excluirActionPerformed"/>
       </Events>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="btn_anterior">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anterior"/>
@@ -294,6 +308,8 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_proximoActionPerformed"/>
       </Events>
     </Component>
+=======
+>>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
     <Component class="javax.swing.JButton" name="btn_alterar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
@@ -302,6 +318,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterarActionPerformed"/>
       </Events>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -311,5 +328,7 @@
         <Property name="text" type="java.lang.String" value="Listar"/>
       </Properties>
     </Component>
+=======
+>>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
   </SubComponents>
 </Form>

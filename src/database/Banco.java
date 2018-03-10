@@ -51,6 +51,10 @@ public class Banco {
             JOptionPane.showMessageDialog(null,"Erro ao executar o commando SQL: "+ sqlex,"Erro",JOptionPane.ERROR_MESSAGE);            
         }        
     }
+<<<<<<< HEAD
     
     
 }
+=======
+}
+>>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
