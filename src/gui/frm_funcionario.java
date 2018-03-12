@@ -21,7 +21,7 @@ public class frm_funcionario extends javax.swing.JFrame {
     // Construtor
     public frm_funcionario() {
         initComponents();
-         setLocationRelativeTo(null);
+        
 
         // Criando objeto da classe Banco
         banco = new Banco();
@@ -129,7 +129,8 @@ public class frm_funcionario extends javax.swing.JFrame {
 
     public void update() {
 
-        try{ // Atribui os valores digitado pelo usuário em uma variável
+        
+        try{
             String id =lbl_id.getText();
             String nome = txt_nome.getText();
             String cpf = txt_cpf.getText();
@@ -154,7 +155,7 @@ public class frm_funcionario extends javax.swing.JFrame {
             
            // Executar comando SQL
             banco.statement.executeUpdate(comando);
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!\n" );
+            JOptionPane.showMessageDialog(null, "Parece que deu certo!\n" , "Ae!", JOptionPane.OK_OPTION);
             
             // Mostra o primeiro registro novamente  
             banco.executeSQL(sql);
@@ -177,7 +178,6 @@ public class frm_funcionario extends javax.swing.JFrame {
         } 
     } 
     
-<<<<<<< HEAD
     public void listar_ant(){
         
         try {     
@@ -188,45 +188,6 @@ public class frm_funcionario extends javax.swing.JFrame {
         } 
     }
 
-=======
-    // Método alterar - altera um registro
-    public void alterar(){
-        try {
-            // Guardar informações da tela em variáveis
-            String tipo = txt_tipo.getText();
-            String nome = txt_nome.getText();
-            String cpf = txt_cpf.getText();
-            String endereco = txt_endereco.getText();
-            String data_nascto = txt_data_nascto.getText();
-            String funcao = txt_funcao.getText();
-            String telefone = txt_telefone.getText();
-            String estado_civil = txt_estado_civil.getText();
-            double salario = Double.parseDouble(txt_salario.getText());
-            
-            // Comando SQL
-            String comando = "update funcionario set id_tipo ="+tipo+", nome_fun = '"+nome+"', cpf_fun = '"+cpf+"', endereco_fun = '"+endereco+"', data_nascto_fun = '"+data_nascto+"', funcao_fun = '"+funcao+"', telefone_fun = '"+telefone+"', estado_civil_fun = '"+estado_civil+"', salario_fun = "+salario+" where id_fun = " + lbl_id.getText();
-            
-            // Executar comando SQL
-            banco.statement.executeUpdate(comando);
-            JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso.","Pronto",JOptionPane.OK_OPTION);
-            
-            // Mostra o primeiro registro novamente  
-            banco.executeSQL(sql);
-            banco.resultset.first();            
-            exibir_dados();
-            
-        }
-        catch (SQLException e){            
-            JOptionPane.showMessageDialog(null, "Erro ao alterar informações!\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
-        } 
-    }
-    
-    // Método listar - lista os registros
-    public void listar(){
-        
-    }
-    
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -254,14 +215,10 @@ public class frm_funcionario extends javax.swing.JFrame {
         txt_tipo = new javax.swing.JTextField();
         lbl_estado_civil = new javax.swing.JLabel();
         btn_excluir = new javax.swing.JButton();
-<<<<<<< HEAD
         btn_anterior = new javax.swing.JButton();
         btn_proximo = new javax.swing.JButton();
         btn_alterar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-=======
-        btn_alterar = new javax.swing.JButton();
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -315,7 +272,6 @@ public class frm_funcionario extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         btn_anterior.setText("Anterior");
         btn_anterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,8 +286,6 @@ public class frm_funcionario extends javax.swing.JFrame {
             }
         });
 
-=======
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
         btn_alterar.setText("Alterar");
         btn_alterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,13 +293,10 @@ public class frm_funcionario extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Listar");
 
-=======
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -389,7 +340,6 @@ public class frm_funcionario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_salario, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-<<<<<<< HEAD
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btn_anterior)
@@ -401,9 +351,6 @@ public class frm_funcionario extends javax.swing.JFrame {
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
-                                .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -455,7 +402,6 @@ public class frm_funcionario extends javax.swing.JFrame {
                     .addComponent(lbl_salario)
                     .addComponent(txt_estado_civil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -473,15 +419,6 @@ public class frm_funcionario extends javax.swing.JFrame {
                             .addComponent(btn_proximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_anterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-=======
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
         );
 
         pack();
@@ -503,7 +440,6 @@ public class frm_funcionario extends javax.swing.JFrame {
         excluir();
     }//GEN-LAST:event_btn_excluirActionPerformed
 
-<<<<<<< HEAD
     private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
         
         listar_ant();
@@ -519,12 +455,6 @@ public class frm_funcionario extends javax.swing.JFrame {
         listar_prox();
     }//GEN-LAST:event_btn_proximoActionPerformed
 
-=======
-    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
-        alterar();
-    }//GEN-LAST:event_btn_alterarActionPerformed
-
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -554,17 +484,13 @@ public class frm_funcionario extends javax.swing.JFrame {
             public void run() {
                 
                 new frm_funcionario().setVisible(true);
-               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_alterar;
-<<<<<<< HEAD
     private javax.swing.JButton btn_anterior;
-=======
->>>>>>> fd835c169ec9d423f1f4420b7a47384dbd8a2494
     private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_proximo;
     private javax.swing.JButton btn_salvar;
