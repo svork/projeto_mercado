@@ -7,7 +7,7 @@
 # git config --global core.excludesfile ~/Documents/github/gitignore
 
 # Build folders
-/build/
+build/
 
 # Compiled source #
 ###################
