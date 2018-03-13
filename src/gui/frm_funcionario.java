@@ -1,11 +1,9 @@
 package gui;
 
 // Importando bibliotecas
-import java.sql.*;
-import database.Banco;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.sql.*; // SQL
+import database.Banco; // Banco de Dados
+import javax.swing.JOptionPane; // Janelas de Mensagens
 
 public class frm_funcionario extends javax.swing.JFrame {
 
@@ -22,7 +20,6 @@ public class frm_funcionario extends javax.swing.JFrame {
     public frm_funcionario() {
         initComponents();
         
-
         // Criando objeto da classe Banco
         banco = new Banco();
 
@@ -127,7 +124,8 @@ public class frm_funcionario extends javax.swing.JFrame {
         }
     }
 
-    public void update() {
+    // Método alterar - altera um registro
+    public void alterar() {
 
         
         try{
@@ -166,25 +164,26 @@ public class frm_funcionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Deu ruim parceiro!\n" + e, "Xii!", JOptionPane.ERROR_MESSAGE);
         }
     }
-//------------------------------------------------------------------------------**************************
-    //Método
+
+    // Método listar_prox - exibe o próximo registro
     public void listar_prox() {
-        
         try {     
-        banco.resultset.next();
+            banco.resultset.next();
             exibir_dados();
+            navega = 2;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao mostrar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Erro ao acessar próximo resgistro!\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
         } 
     } 
     
+    // Método listar_ant - exibe o registro anterior
     public void listar_ant(){
-        
         try {     
-        banco.resultset.previous();
+            banco.resultset.previous();
             exibir_dados();
+            navega = 1;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao mostrar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Erro ao acessar o registro anterior!\n" + e,"Erro!",JOptionPane.ERROR_MESSAGE);            
         } 
     }
 
@@ -441,17 +440,14 @@ public class frm_funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
-        
-        listar_ant();
-   
+        listar_ant();   
     }//GEN-LAST:event_btn_anteriorActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
-        update();
+        alterar();
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proximoActionPerformed
-        
         listar_prox();
     }//GEN-LAST:event_btn_proximoActionPerformed
 

@@ -11,7 +11,7 @@ public class Banco {
     final private String url = "jdbc:mysql://localhost:3306/projeto_mercado";
     final private String driver = "com.mysql.jdbc.Driver";
     final private String user = "root";
-    final private String password = "root"; //---------------------------Alterar
+    final private String password = "root";
     private Connection connection;
     public Statement statement;
     public ResultSet resultset;   
@@ -21,7 +21,6 @@ public class Banco {
         try {                
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password); 
-            JOptionPane.showMessageDialog(null, "AMZN está Online\n" );  
         }
         catch(ClassNotFoundException e){                
             JOptionPane.showMessageDialog(null, "Erro! Driver de conexão não foi encontrando\n" + e);               
@@ -52,8 +51,6 @@ public class Banco {
         }        
     }
 
-    
-    
 }
 
 
