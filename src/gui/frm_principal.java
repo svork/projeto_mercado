@@ -18,64 +18,89 @@ public class frm_principal extends javax.swing.JFrame {
         btn_sair = new javax.swing.JButton();
         btn_funcionario = new javax.swing.JButton();
         lbl_titulo = new javax.swing.JLabel();
+        BackGround = new javax.swing.JLabel();
+        BackGround1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menu_sair = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menu_empresa = new javax.swing.JMenuItem();
+        menu_grupo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Green Market System");
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_empresa.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        lbl_empresa.setText("Supermercado Pague Mais ou Menos");
+        lbl_empresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Supermercado.png"))); // NOI18N
+        getContentPane().add(lbl_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 680, -1));
 
+        btn_sair.setBackground(new java.awt.Color(255, 255, 255));
+        btn_sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Sair.png"))); // NOI18N
         btn_sair.setText("Sair");
+        btn_sair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_sair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_sairActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, 80, 100));
 
-        btn_funcionario.setText("Cadastro de Funcionários");
+        btn_funcionario.setBackground(new java.awt.Color(255, 255, 255));
+        btn_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novoCliente.png"))); // NOI18N
+        btn_funcionario.setText("Cadastro de Funcionário");
+        btn_funcionario.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btn_funcionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_funcionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_funcionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_funcionarioActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        lbl_titulo.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        lbl_titulo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbl_titulo.setText("Green Market System v0.1");
+        getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lbl_empresa))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btn_funcionario)))
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_titulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(lbl_empresa)
-                .addGap(27, 27, 27)
-                .addComponent(btn_funcionario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_titulo))
-                .addContainerGap())
-        );
+        BackGround.setBackground(new java.awt.Color(255, 255, 255));
+        BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGround.png"))); // NOI18N
+        BackGround.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
+        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 680, 340));
+
+        BackGround1.setBackground(new java.awt.Color(255, 255, 255));
+        BackGround1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BackGround1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGround.png"))); // NOI18N
+        BackGround1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
+        getContentPane().add(BackGround1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 680, 90));
+
+        jMenu1.setText("Arquivo");
+
+        menu_sair.setText("Sair");
+        menu_sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_sairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_sair);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sobre");
+
+        menu_empresa.setText("Empresa");
+        jMenu2.add(menu_empresa);
+
+        menu_grupo.setText("Grupo");
+        jMenu2.add(menu_grupo);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
@@ -93,6 +118,11 @@ public class frm_principal extends javax.swing.JFrame {
         new frm_funcionario().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_funcionarioActionPerformed
+
+    private void menu_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_sairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_menu_sairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,9 +160,17 @@ public class frm_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BackGround;
+    private javax.swing.JLabel BackGround1;
     private javax.swing.JButton btn_funcionario;
     private javax.swing.JButton btn_sair;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lbl_empresa;
     private javax.swing.JLabel lbl_titulo;
+    private javax.swing.JMenuItem menu_empresa;
+    private javax.swing.JMenuItem menu_grupo;
+    private javax.swing.JMenuItem menu_sair;
     // End of variables declaration//GEN-END:variables
 }
