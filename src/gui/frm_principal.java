@@ -1,5 +1,5 @@
 package gui;
-
+import javax.swing.JOptionPane; // Janelas de Mensagens
 // Bibliotecas
 import javax.swing.JOptionPane; // Janelas de Mensagens
 
@@ -14,12 +14,10 @@ public class frm_principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbl_empresa = new javax.swing.JLabel();
+        lbl_titulo = new javax.swing.JLabel();
         btn_sair = new javax.swing.JButton();
         btn_funcionario = new javax.swing.JButton();
-        lbl_titulo = new javax.swing.JLabel();
         BackGround = new javax.swing.JLabel();
-        BackGround1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menu_sair = new javax.swing.JMenuItem();
@@ -33,9 +31,9 @@ public class frm_principal extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_empresa.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        lbl_empresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Supermercado.png"))); // NOI18N
-        getContentPane().add(lbl_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 680, -1));
+        lbl_titulo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lbl_titulo.setText("Green Market System v0.1");
+        getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, -1, -1));
 
         btn_sair.setBackground(new java.awt.Color(255, 255, 255));
         btn_sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Sair.png"))); // NOI18N
@@ -47,7 +45,7 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_sairActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, 80, 100));
+        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 80, 100));
 
         btn_funcionario.setBackground(new java.awt.Color(255, 255, 255));
         btn_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novoCliente.png"))); // NOI18N
@@ -60,23 +58,13 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_funcionarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        lbl_titulo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lbl_titulo.setText("Green Market System v0.1");
-        getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
+        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 100));
 
         BackGround.setBackground(new java.awt.Color(255, 255, 255));
         BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGround.png"))); // NOI18N
+        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGroundMenu.png"))); // NOI18N
         BackGround.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
-        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 680, 340));
-
-        BackGround1.setBackground(new java.awt.Color(255, 255, 255));
-        BackGround1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BackGround1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGround.png"))); // NOI18N
-        BackGround1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
-        getContentPane().add(BackGround1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 680, 90));
+        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 450));
 
         jMenu1.setText("Arquivo");
 
@@ -93,9 +81,19 @@ public class frm_principal extends javax.swing.JFrame {
         jMenu2.setText("Sobre");
 
         menu_empresa.setText("Empresa");
+        menu_empresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_empresaActionPerformed(evt);
+            }
+        });
         jMenu2.add(menu_empresa);
 
         menu_grupo.setText("Grupo");
+        menu_grupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_grupoActionPerformed(evt);
+            }
+        });
         jMenu2.add(menu_grupo);
 
         jMenuBar1.add(jMenu2);
@@ -123,6 +121,19 @@ public class frm_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_menu_sairActionPerformed
+
+    private void menu_empresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_empresaActionPerformed
+        // TODO add your handling code here:
+        
+            JOptionPane.showMessageDialog(null, "AMZN criou o sistema do 'Mercado Mais ou menos!'" );
+        
+        
+    }//GEN-LAST:event_menu_empresaActionPerformed
+
+    private void menu_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_grupoActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Rodrigo, Renan, Mari e Dani" );
+    }//GEN-LAST:event_menu_grupoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,13 +172,11 @@ public class frm_principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackGround;
-    private javax.swing.JLabel BackGround1;
     private javax.swing.JButton btn_funcionario;
     private javax.swing.JButton btn_sair;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JLabel lbl_empresa;
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JMenuItem menu_empresa;
     private javax.swing.JMenuItem menu_grupo;
