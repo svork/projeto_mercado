@@ -183,9 +183,9 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btn_alterar" alignment="0" pref="49" max="32767" attributes="0"/>
-                          <Component id="btn_salvar" alignment="0" pref="49" max="32767" attributes="0"/>
-                          <Component id="btn_excluir" alignment="0" pref="49" max="32767" attributes="0"/>
+                          <Component id="btn_alterar" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btn_salvar" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btn_excluir" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_voltar" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -236,6 +236,11 @@
     <Component class="javax.swing.JTextField" name="txt_salario">
     </Component>
     <Component class="javax.swing.JButton" name="btn_salvar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/salvar.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_salvarActionPerformed"/>
       </Events>
@@ -318,21 +323,41 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_excluir">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/EXCLUIR.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_excluirActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_anterior">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/SETAANTERIOR.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_anteriorActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_proximo">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/SETAPROXIMO.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_proximoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_alterar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/ALTERAR.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterarActionPerformed"/>
       </Events>

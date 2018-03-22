@@ -244,6 +244,7 @@ public class frm_funcionario extends javax.swing.JFrame {
         lbl_codigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_codigo.setText("Código");
 
+        btn_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         btn_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salvarActionPerformed(evt);
@@ -283,24 +284,28 @@ public class frm_funcionario extends javax.swing.JFrame {
         lbl_estado_civil.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_estado_civil.setText("Estado Civil");
 
+        btn_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/EXCLUIR.png"))); // NOI18N
         btn_excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_excluirActionPerformed(evt);
             }
         });
 
+        btn_anterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/SETAANTERIOR.png"))); // NOI18N
         btn_anterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_anteriorActionPerformed(evt);
             }
         });
 
+        btn_proximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/SETAPROXIMO.png"))); // NOI18N
         btn_proximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_proximoActionPerformed(evt);
             }
         });
 
+        btn_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ALTERAR.png"))); // NOI18N
         btn_alterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_alterarActionPerformed(evt);
@@ -461,9 +466,9 @@ public class frm_funcionario extends javax.swing.JFrame {
                         .addComponent(btn_anterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                            .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                            .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                            .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_voltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
