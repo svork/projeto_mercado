@@ -45,6 +45,33 @@ insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_f
 
 insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values (4, 'Gregory Oliveira', '12609178901', 'Rua 8, 10 Jardim Mirante, Hortolândia, SP', '1993-10-31', 'Caixa', '193798100', 'Casado', 2000.00);
 
+-- Criar tabela de produtos
+create table produto (
+  codigo_pro int primary key auto_increment not null, 
+  nome_pro varchar(100) not null, 
+  descricao_pro varchar(400) not null, 
+  quantidade_pro decimal(10,2) not null, 
+  unidade_pro varchar(50) not null, 
+  fornecedor_pro varchar(100) not null, 
+  ponto_pro int not null, 
+  categoria_pro varchar(100) not null, 
+  preco_pro decimal(10,2) not null
+);
+  
+-- Inserir alguns produtos de teste
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Arroz', 'Arroz Tio João Reserva EspeciaL Premium Gourmet Black Edition', 5000, 'Quilos', 'Fazenda do Seu Zé', 12, 'Não Perecível', 12.00);
+
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Feijão', 'Feijão Broto Legal Carioca Soltinho Selecionado não precisa lavar Bem temperado', 1000, 'Quilos', 'Fazenda do Seu Zé', 8, 'Não Perecível', 7.00);
+
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Batata', 'Batata Doce Orgânica Dourada Descascada ', 8000, 'Quilos', "Rodrigo's Farm", 5, 'Perecível', 19.95);
+
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Macarrão', 'Macarrão Cabelo de Anjo Suculento Integral Malhado', 7000, 'Quilos', 'Mary LTDA Produtos Alimentícios', 4, 'Não Perecível', 10.00);
+
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Suco', 'Suco com extrato de polpa filtrada pasteurizada de Laranja', 20000, 'Litros', 'Beetle Juice Comércio de Bebidas Refinadas', 9, 'Bebida', 15.00);
+
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Refrigerante', 'Refrigerante Guaraná Jesus 3.0 Limited Edition', 50000, 'Litros', 'RM Soda Indústria de Bebidas Gaseificadas', 14, 'Bebida', 20.00);
+
 -- Select para testar
 select nome_fun as 'Nome', endereco_fun as 'Endereço', funcao_fun as 'Função', salario_fun as 'Salário' from funcionario;
+select descricao_pro as 'Descrição', preco_pro as 'Preço' from produto;
 
