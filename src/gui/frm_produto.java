@@ -68,7 +68,7 @@ public class frm_produto extends javax.swing.JFrame {
             // Guardar informações da tela em variáveis
             String nome = txt_nome.getText();
             String descricao = txt_descricao.getText();
-            int quantidade = Integer.parseInt(txt_quantidade.getText());
+            double quantidade = Double.parseDouble(txt_quantidade.getText());
             String unidade = txt_unidade.getText();
             String fornecedor = txt_fornecedor.getText();
             int ponto = Integer.parseInt(txt_ponto.getText());
@@ -130,7 +130,7 @@ public class frm_produto extends javax.swing.JFrame {
             int codigo = Integer.parseInt(lbl_codigo.getText());
             String nome = txt_nome.getText();
             String descricao = txt_descricao.getText();
-            int quantidade = Integer.parseInt(txt_quantidade.getText());
+            double quantidade = Double.parseDouble(txt_quantidade.getText());
             String unidade = txt_unidade.getText();
             String fornecedor = txt_fornecedor.getText();
             int ponto = Integer.parseInt(txt_ponto.getText());
