@@ -1,7 +1,7 @@
 -- banco_dados.txt
 -- 04-MAR-2018
 -- Projeto Mercado
--- Este é o banco de dados inicial para a primeira historia, cadastro de funcionarios
+-- Este é o banco de dados do Projeto Mercado - Green Market System
 
 -- Criar banco de dados
 create database projeto_mercado;
@@ -59,19 +59,19 @@ create table produto (
 );
   
 -- Inserir alguns produtos de teste
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Arroz', 'Arroz Tio João Reserva EspeciaL Premium Gourmet Black Edition', 5000, 'Quilos', 'Fazenda do Seu Zé', 12, 'Não Perecível', 12.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Arroz', 'Arroz Tio João Reserva EspeciaL Premium Gourmet Black Edition pacote 5Kg', 5000, 'Quilos', 'Fazenda do Seu Zé', 12, 'Não Perecível', 12.00);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Feijão', 'Feijão Broto Legal Carioca Soltinho Selecionado não precisa lavar Bem temperado', 1000, 'Quilos', 'Fazenda do Seu Zé', 8, 'Não Perecível', 7.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Feijão', 'Feijão Broto Legal Carioca Soltinho Selecionado não precisa lavar Bem temperado pacote 1Kg', 1000, 'Quilos', 'Horta da Dani', 8, 'Não Perecível', 7.00);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Batata', 'Batata Doce Orgânica Dourada Descascada ', 8000, 'Quilos', "Rodrigo's Farm", 5, 'Perecível', 19.95);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Batata', 'Batata Doce Orgânica Dourada Descascada ', 8000, 'Quilos', 'Rodrigos Farm', 5, 'Perecível', 19.95);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Macarrão', 'Macarrão Cabelo de Anjo Suculento Integral Malhado', 7000, 'Quilos', 'Mary LTDA Produtos Alimentícios', 4, 'Não Perecível', 10.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Macarrão', 'Macarrão Cabelo de Anjo Suculento Integral Malhado pacote 500grs', 7000, 'Quilos', 'Mary LTDA Produtos Alimentícios', 4, 'Não Perecível', 10.00);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Suco', 'Suco com extrato de polpa filtrada pasteurizada de Laranja', 20000, 'Litros', 'Beetle Juice Comércio de Bebidas Refinadas', 9, 'Bebida', 15.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Suco', 'Suco com extrato de polpa filtrada pasteurizada de Laranja embalagem 1l', 20000, 'Litros', 'Beetle Juice Comércio de Bebidas Refinadas', 9, 'Bebida', 15.00);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Refrigerante', 'Refrigerante Guaraná Jesus 3.0 Limited Edition', 50000, 'Litros', 'RM Soda Indústria de Bebidas Gaseificadas', 14, 'Bebida', 20.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Refrigerante', 'Refrigerante Guaraná Jesus 3.0 Limited Edition lata 350ml', 50000, 'Litros', 'RM Soda Indústria de Bebidas Gaseificadas', 14, 'Bebida', 20.00);
 
 -- Select para testar
 select nome_fun as 'Nome', endereco_fun as 'Endereço', funcao_fun as 'Função', salario_fun as 'Salário' from funcionario;
-select descricao_pro as 'Descrição', preco_pro as 'Preço' from produto;
+select descricao_pro as 'Descrição', quantidade_pro as 'Quantidade', unidade_pro as 'Unidade', preco_pro as 'Preço' from produto;
 

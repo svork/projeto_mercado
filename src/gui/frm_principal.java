@@ -1,5 +1,5 @@
 package gui;
-import javax.swing.JOptionPane; // Janelas de Mensagens
+
 // Bibliotecas
 import javax.swing.JOptionPane; // Janelas de Mensagens
 
@@ -18,6 +18,7 @@ public class frm_principal extends javax.swing.JFrame {
         btn_sair = new javax.swing.JButton();
         btn_funcionario = new javax.swing.JButton();
         BackGround = new javax.swing.JLabel();
+        btn_produto = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menu_sair = new javax.swing.JMenuItem();
@@ -45,7 +46,7 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_sairActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 80, 100));
+        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 80, 100));
 
         btn_funcionario.setBackground(new java.awt.Color(255, 255, 255));
         btn_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novoCliente.png"))); // NOI18N
@@ -65,6 +66,16 @@ public class frm_principal extends javax.swing.JFrame {
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGroundMenu.png"))); // NOI18N
         BackGround.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
         getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 450));
+
+        btn_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produtos.png"))); // NOI18N
+        btn_produto.setText("Cadastro de Produto");
+        btn_produto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_produtoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 190, 100));
 
         jMenu1.setText("Arquivo");
 
@@ -118,22 +129,29 @@ public class frm_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_funcionarioActionPerformed
 
     private void menu_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_sairActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        // Botão pergunta se o usuário quer realmente sair do programa
+        if(JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Sair do Programa", JOptionPane.YES_NO_OPTION) == 0 ){
+            this.dispose();
+        }
     }//GEN-LAST:event_menu_sairActionPerformed
 
     private void menu_empresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_empresaActionPerformed
         // TODO add your handling code here:
-        
-            JOptionPane.showMessageDialog(null, "AMZN criou o sistema do 'Mercado Mais ou menos!'" );
+        JOptionPane.showMessageDialog(null, "AMZN criou o sistema do 'Mercado Mais ou menos!'" );
         
         
     }//GEN-LAST:event_menu_empresaActionPerformed
 
     private void menu_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_grupoActionPerformed
-        // TODO add your handling code here:
+        // Este botão exibe o nome das pessoas que desenvolveram o software
         JOptionPane.showMessageDialog(null, "Rodrigo, Renan, Mari e Dani" );
     }//GEN-LAST:event_menu_grupoActionPerformed
+
+    private void btn_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_produtoActionPerformed
+        // Esse botão chama o form de cadastro de Produtos
+        new frm_produto().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_produtoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +191,7 @@ public class frm_principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackGround;
     private javax.swing.JButton btn_funcionario;
+    private javax.swing.JButton btn_produto;
     private javax.swing.JButton btn_sair;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
