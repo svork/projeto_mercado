@@ -45,6 +45,8 @@ insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_f
 
 insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values (4, 'Gregory Oliveira', '12609178901', 'Rua 8, 10 Jardim Mirante, Hortolândia, SP', '1993-10-31', 'Caixa', '193798100', 'Casado', 2000.00);
 
+-- A partir daqui, nova entrega;
+
 -- Criar tabela de produtos
 create table produto (
   codigo_pro int primary key auto_increment not null, 
