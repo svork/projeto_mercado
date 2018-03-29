@@ -17,8 +17,8 @@ public class frm_principal extends javax.swing.JFrame {
         lbl_titulo = new javax.swing.JLabel();
         btn_sair = new javax.swing.JButton();
         btn_funcionario = new javax.swing.JButton();
-        BackGround = new javax.swing.JLabel();
         btn_produto = new javax.swing.JButton();
+        BackGround = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menu_sair = new javax.swing.JMenuItem();
@@ -61,21 +61,22 @@ public class frm_principal extends javax.swing.JFrame {
         });
         getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 100));
 
-        BackGround.setBackground(new java.awt.Color(255, 255, 255));
-        BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGroundMenu.png"))); // NOI18N
-        BackGround.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
-        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 450));
-
         btn_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produtos.png"))); // NOI18N
         btn_produto.setText("Cadastro de Produto");
+        btn_produto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_produto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_produto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_produtoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 190, 100));
+        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 170, 150));
+
+        BackGround.setBackground(new java.awt.Color(255, 255, 255));
+        BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGroundMenu.png"))); // NOI18N
+        BackGround.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
+        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 450));
 
         jMenu1.setText("Arquivo");
 

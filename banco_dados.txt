@@ -9,23 +9,10 @@ create database projeto_mercado;
 -- Selecionar banco de dados
 use projeto_mercado;
 
--- Criar tabela tipo_funcionario - contem os possiveis tipos de funcionarios no supermercado
-create table tipo_funcionario (
-  id_tipo int primary key auto_increment not null, 
-  nome_tipo varchar(30) not null
-);
-
--- Inserir tipos de funcionarios
-insert into tipo_funcionario (nome_tipo) values ('Estoque');
-insert into tipo_funcionario (nome_tipo) values ('Atendimento');
-insert into tipo_funcionario (nome_tipo) values ('Gerencia');
-insert into tipo_funcionario (nome_tipo) values ('Caixa');
-
 -- Criar tabela funcionario - dados do funcionario, como nome, cpf, endereco, etc
 create table funcionario (
-  id_fun int primary key auto_increment not null, 
-  id_tipo int not null, 
-  foreign key (id_tipo) references tipo_funcionario (id_tipo), 
+  id_fun int unsigned primary key auto_increment not null, 
+  tipo_fun varchar(100) not null, 
   nome_fun varchar(100) not null, 
   cpf_fun varchar(11) not null unique, -- unique -> nao poder haver dois cpfs iguais
   endereco_fun varchar(100) not null, 
@@ -37,19 +24,17 @@ create table funcionario (
 );
 
 -- Inserir funcionarios teste
-insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values (1, 'Cristiane Jensen', '12345678901', 'Rua 2, 39 Jardim Santana, Hortolândia, SP', '1983-12-21', 'Estoquista', '193741700', 'Casado', 1000.00);
+insert into funcionario (tipo_fun, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values ('Estoque', 'Cristiane Jensen', '12345678901', 'Rua 2, 39 Jardim Santana, Hortolândia, SP', '1983-12-21', 'Estoquista', '193741700', 'Casado', 1000.00);
 
-insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values (2, 'Adriana Carvenalli', '12381078901', 'Rua 9, 19 Jardim Minda, Hortolândia, SP', '1963-02-11', 'Atendente', '193018700', 'Casado', 1000.00);
+insert into funcionario (tipo_fun, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values ('Atendimento ao Cliente', 'Adriana Carvenalli', '12381078901', 'Rua 9, 19 Jardim Minda, Hortolândia, SP', '1963-02-11', 'Atendente', '193018700', 'Casado', 1000.00);
 
-insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values (3, 'Julio Lemos', '15018678901', 'Rua 10, 18 Jardim Amanda, Hortolândia, SP', '1961-01-11', 'Gerente', '193702300', 'Solteiro', 7000.00);
+insert into funcionario (tipo_fun, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values ('Gerência', 'Julio Lemos', '15018678901', 'Rua 10, 18 Jardim Amanda, Hortolândia, SP', '1961-01-11', 'Gerente', '193702300', 'Solteiro', 7000.00);
 
-insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values (4, 'Gregory Oliveira', '12609178901', 'Rua 8, 10 Jardim Mirante, Hortolândia, SP', '1993-10-31', 'Caixa', '193798100', 'Casado', 2000.00);
-
--- A partir daqui, nova entrega;
+insert into funcionario (tipo_fun, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values ('Vendas', 'Gregory Oliveira', '12609178901', 'Rua 8, 10 Jardim Mirante, Hortolândia, SP', '1993-10-31', 'Caixa', '193798100', 'Casado', 2000.00);
 
 -- Criar tabela de produtos
 create table produto (
-  codigo_pro int primary key auto_increment not null, 
+  codigo_pro int unsigned primary key auto_increment not null, 
   nome_pro varchar(100) not null, 
   descricao_pro varchar(400) not null, 
   quantidade_pro decimal(10,2) not null, 
@@ -61,17 +46,17 @@ create table produto (
 );
   
 -- Inserir alguns produtos de teste
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Arroz', 'Arroz Tio João Reserva EspeciaL Premium Gourmet Black Edition pacote 5Kg', 5000, 'Quilos', 'Fazenda do Seu Zé', 12, 'Não Perecível', 12.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Arroz', 'Arroz Tio João Reserva EspeciaL Premium Gourmet Black Edition pacote 5Kg', 2349.71, 'Quilos', 'Fazenda do Seu Zé', 12, 'Não Perecível', 11.99);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Feijão', 'Feijão Broto Legal Carioca Soltinho Selecionado não precisa lavar Bem temperado pacote 1Kg', 1000, 'Quilos', 'Horta da Dani', 8, 'Não Perecível', 7.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Feijão', 'Feijão Broto Legal Carioca Soltinho Selecionado não precisa lavar Bem temperado pacote 1Kg', 918.16, 'Quilos', 'Horta da Dani', 8, 'Não Perecível', 7.89);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Batata', 'Batata Doce Orgânica Dourada Descascada ', 8000, 'Quilos', 'Rodrigos Farm', 5, 'Perecível', 19.95);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Batata', 'Batata Doce Orgânica Dourada Descascada ', 12846.10, 'Quilos', 'Rodrigos Farm', 5, 'Perecível', 19.95);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Macarrão', 'Macarrão Cabelo de Anjo Suculento Integral Malhado pacote 500grs', 7000, 'Quilos', 'Mary LTDA Produtos Alimentícios', 4, 'Não Perecível', 10.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Macarrão', 'Macarrão Cabelo de Anjo Suculento Integral Malhado pacote 500grs', 19834.17, 'Quilos', 'Mary LTDA Produtos Alimentícios', 4, 'Não Perecível', 13.49);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Suco', 'Suco com extrato de polpa filtrada pasteurizada de Laranja embalagem 1l', 20000, 'Litros', 'Beetle Juice Comércio de Bebidas Refinadas', 9, 'Bebida', 15.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Suco', 'Suco com extrato de polpa filtrada pasteurizada de Laranja embalagem 1l', 10973.92, 'Litros', 'Beetle Juice Comércio de Bebidas Refinadas', 9, 'Bebida', 14.99);
 
-insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Refrigerante', 'Refrigerante Guaraná Jesus 3.0 Limited Edition lata 350ml', 50000, 'Litros', 'RM Soda Indústria de Bebidas Gaseificadas', 14, 'Bebida', 20.00);
+insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Refrigerante', 'Refrigerante Guaraná Jesus 3.0 Limited Edition lata 350ml', 187348.31, 'Litros', 'RM Soda Indústria de Bebidas Gaseificadas', 14, 'Bebida', 81.99);
 
 -- Select para testar
 select nome_fun as 'Nome', endereco_fun as 'Endereço', funcao_fun as 'Função', salario_fun as 'Salário' from funcionario;

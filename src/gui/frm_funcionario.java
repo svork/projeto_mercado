@@ -79,7 +79,7 @@ public class frm_funcionario extends javax.swing.JFrame {
 
             // Comando SQL
             String comando = "insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values "
-                    + "(" + tipo + ", '" + nome + "', '" + cpf + "', '" + endereco + "', '" + data_nascto + "', '" + funcao + "', '" + telefone + "', '" + estado_civil + "', " + salario + ")";
+                    + "('" + tipo + "', '" + nome + "', '" + cpf + "', '" + endereco + "', '" + data_nascto + "', '" + funcao + "', '" + telefone + "', '" + estado_civil + "', " + salario + ")";
 
             // Executar comando SQL
             banco.statement.executeUpdate(comando);
@@ -127,7 +127,8 @@ public class frm_funcionario extends javax.swing.JFrame {
     // Método alterar - altera um registro
     public void alterar() {
         try{
-            String id =lbl_id.getText();
+            String id = lbl_id.getText();
+            String tipo = txt_tipo.getText();
             String nome = txt_nome.getText();
             String cpf = txt_cpf.getText();
             String endereco = txt_endereco.getText();
@@ -140,6 +141,7 @@ public class frm_funcionario extends javax.swing.JFrame {
             //Comando SQL
             String comando = "update funcionario "
                     + " set nome_fun = '"+nome+"',"
+                    + " tipo_fun = '"+tipo+"', "
                     + " cpf_fun = "+cpf+","
                     + " endereco_fun = '"+endereco+"',"
                     + " data_nascto_fun = '"+data_nascto+"',"
@@ -239,7 +241,7 @@ public class frm_funcionario extends javax.swing.JFrame {
         setResizable(false);
 
         lbl_salario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_salario.setText("Salário ");
+        lbl_salario.setText("Salário R$");
 
         lbl_codigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_codigo.setText("Código");

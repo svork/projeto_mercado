@@ -8,7 +8,7 @@ public class frm_splash extends javax.swing.JFrame {
     // Construtor
     public frm_splash() {
         initComponents();
-        
+       
         // Barra de progresso
         new Thread() {
             public void run() {
@@ -57,6 +57,7 @@ public class frm_splash extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocation(new java.awt.Point(0, 0));
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
