@@ -46,10 +46,10 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_sairActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 80, 100));
+        getContentPane().add(btn_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 120, 120));
 
         btn_funcionario.setBackground(new java.awt.Color(255, 255, 255));
-        btn_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novoCliente.png"))); // NOI18N
+        btn_funcionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastroFuncionario.png"))); // NOI18N
         btn_funcionario.setText("Cadastro de Funcionário");
         btn_funcionario.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btn_funcionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -59,9 +59,9 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_funcionarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 100));
+        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 120));
 
-        btn_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produtos.png"))); // NOI18N
+        btn_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastroProduto.png"))); // NOI18N
         btn_produto.setText("Cadastro de Produto");
         btn_produto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_produto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -70,7 +70,7 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_produtoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 170, 150));
+        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 140, 120));
 
         BackGround.setBackground(new java.awt.Color(255, 255, 255));
         BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
