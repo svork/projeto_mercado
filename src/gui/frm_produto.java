@@ -6,20 +6,38 @@ import database.Banco; // Classe Banco de Dados
 import javax.swing.JOptionPane; // Janelas de Mensagens
 
 public class frm_produto extends javax.swing.JFrame {
-
+    
+    // Recebe os valores do frm estoque e exibe na tela
+    public void enviar_dados(String id, String nome, String preco, String descricao, 
+            String categoria, String quantidade, String medida, String fornecedor, 
+            String pontos){
+        
+    // Pega valor e joga
+        lbl_codigo.setText(id);
+        txt_nome.setText(nome);
+        txt_preco.setText(preco);
+        txt_descricao.setText(descricao);
+        txt_categoria.setText(categoria);
+        txt_quantidade.setText(quantidade);
+        txt_unidade.setText(medida);
+        txt_fornecedor.setText(fornecedor);
+        txt_ponto.setText(pontos);
+    }
+    
+    
     // Instancia da classe de Conexão
     Banco banco;
 
     // controlar erro de navegacao nos botoes proximo e anterior
     int navega = 0;
 
-    // select principal
+    // linha de comando 
     String sql = "select * from produto";
 
     // Construtor
     public frm_produto() {
         initComponents();
-        
+
         // Criando objeto da classe Banco
         banco = new Banco();
 
@@ -37,7 +55,7 @@ public class frm_produto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     // Método exibir_dados - mostra os dados na tela
     public void exibir_dados() {
         try {
@@ -63,7 +81,7 @@ public class frm_produto extends javax.swing.JFrame {
     }
     
     // Método salvar - cria um novo registro
-    public void salvar() {
+    /*public void salvar() {
         try {
             // Guardar informações da tela em variáveis
             String nome = txt_nome.getText();
@@ -92,7 +110,7 @@ public class frm_produto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
             System.out.println("erro" +e);
         }
-    }
+    }*/
     
     // Método excluir - exclui um registro
     public void excluir() {
@@ -181,10 +199,8 @@ public class frm_produto extends javax.swing.JFrame {
         btn_voltar = new javax.swing.JButton();
         btn_alterar = new javax.swing.JButton();
         btn_excluir = new javax.swing.JButton();
-        btn_salvar = new javax.swing.JButton();
         lbl_alterar = new javax.swing.JLabel();
         lbl_excluir = new javax.swing.JLabel();
-        lbl_salvar = new javax.swing.JLabel();
         lbl_voltar = new javax.swing.JLabel();
         btn_estoque = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -233,21 +249,11 @@ public class frm_produto extends javax.swing.JFrame {
             }
         });
 
-        btn_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Salvar.png"))); // NOI18N
-        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salvarActionPerformed(evt);
-            }
-        });
-
         lbl_alterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_alterar.setText("Alterar");
 
         lbl_excluir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_excluir.setText("Excluir");
-
-        lbl_salvar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        lbl_salvar.setText("Salvar");
 
         lbl_voltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_voltar.setText("Voltar");
@@ -415,12 +421,7 @@ public class frm_produto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lbl_salvar)))
-                        .addGap(53, 53, 53)
+                        .addGap(113, 113, 113)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -439,7 +440,6 @@ public class frm_produto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_estoque))
@@ -448,10 +448,9 @@ public class frm_produto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbl_excluir)
-                        .addComponent(lbl_salvar)
                         .addComponent(lbl_alterar))
                     .addComponent(lbl_voltar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -470,16 +469,14 @@ public class frm_produto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_categoriaActionPerformed
 
-    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        salvar();
-    }//GEN-LAST:event_btn_salvarActionPerformed
-
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
         excluir();
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
         alterar();
+        new frm_estoque().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_estoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estoqueActionPerformed
@@ -524,7 +521,6 @@ public class frm_produto extends javax.swing.JFrame {
     private javax.swing.JButton btn_alterar;
     private javax.swing.JButton btn_estoque;
     private javax.swing.JButton btn_excluir;
-    private javax.swing.JButton btn_salvar;
     private javax.swing.JButton btn_voltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_alterar;
@@ -538,7 +534,6 @@ public class frm_produto extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_ponto;
     private javax.swing.JLabel lbl_preco;
     private javax.swing.JLabel lbl_quantidade;
-    private javax.swing.JLabel lbl_salvar;
     private javax.swing.JLabel lbl_unidade;
     private javax.swing.JLabel lbl_voltar;
     private javax.swing.JScrollPane painel_descricao;

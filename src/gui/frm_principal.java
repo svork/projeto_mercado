@@ -150,7 +150,7 @@ public class frm_principal extends javax.swing.JFrame {
 
     private void btn_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_produtoActionPerformed
         // Esse botão chama o form de cadastro de Produtos
-        new frm_produto().setVisible(true);
+        new frm_estoque().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_produtoActionPerformed
 

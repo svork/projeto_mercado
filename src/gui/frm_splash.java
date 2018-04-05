@@ -18,10 +18,20 @@ public class frm_splash extends javax.swing.JFrame {
                         jPB.setValue(i);
                         
                         // A cada incremento da progress bar, exibir um texto diferente    
-                        if (jPB.getValue() >= 30){
-                            lbl_texto.setText("Carregando Sistema...");
+                        if (jPB.getValue() >= 2){
+                            lbl_texto.setText("Carregando Sistema");
                         }
                         
+                        if (jPB.getValue() >= 10){
+                            lbl_texto.setText("Carregando Sistema.");
+                        }
+                        if (jPB.getValue() >= 12){
+                            lbl_texto.setText("Carregando Sistema..");
+                        }
+                        if (jPB.getValue() >= 14){
+                            lbl_texto.setText("Carregando Sistema...");
+                        }
+
                         if (jPB.getValue() >= 60){
                             lbl_texto.setText("Carregando Banco de Dados...");
                         }
