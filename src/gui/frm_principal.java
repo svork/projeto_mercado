@@ -18,6 +18,7 @@ public class frm_principal extends javax.swing.JFrame {
         btn_sair = new javax.swing.JButton();
         btn_funcionario = new javax.swing.JButton();
         btn_produto = new javax.swing.JButton();
+        btn_cliente = new javax.swing.JButton();
         BackGround = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -59,7 +60,7 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_funcionarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 120));
+        getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 150, 120));
 
         btn_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastroProduto.png"))); // NOI18N
         btn_produto.setText("Cadastro de Produto");
@@ -70,13 +71,24 @@ public class frm_principal extends javax.swing.JFrame {
                 btn_produtoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 140, 120));
+        getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 150, 120));
+
+        btn_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastroCliente.png"))); // NOI18N
+        btn_cliente.setText("Cadastro de Clientes");
+        btn_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_cliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 150, 120));
 
         BackGround.setBackground(new java.awt.Color(255, 255, 255));
         BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BackGroundMenu.png"))); // NOI18N
         BackGround.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(243, 255, 255), 1, true));
-        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 680, 450));
+        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 450));
 
         jMenu1.setText("Arquivo");
 
@@ -154,6 +166,11 @@ public class frm_principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_produtoActionPerformed
 
+    private void btn_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clienteActionPerformed
+       new frm_cliente().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btn_clienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,6 +208,7 @@ public class frm_principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackGround;
+    private javax.swing.JButton btn_cliente;
     private javax.swing.JButton btn_funcionario;
     private javax.swing.JButton btn_produto;
     private javax.swing.JButton btn_sair;
