@@ -58,7 +58,25 @@ insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, forne
 
 insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values ('Refrigerante', 'Refrigerante Guaraná Jesus 3.0 Limited Edition lata 350ml', 187348.31, 'Litros', 'RM Soda Indústria de Bebidas Gaseificadas', 14, 'Bebida', 81.99);
 
+-- Criar tabela de clientes
+create table cliente (
+  codigo_cli int unsigned primary key auto_increment not null, 
+  nome_cli varchar(100) not null, 
+  cpf_cli varchar(400) not null, 
+  data_nascto_cli date not null, 
+  telefone_cli varchar(50) not null, 
+  endereco_cli varchar(100) not null, 
+  estado_civil_cli varchar(100) not null, 
+  ponto_cli int unsigned not null
+);
+
+-- Inserir alguns clientes de exemplo
+insert into cliente (nome_cli, cpf_cli, data_nascto_cli, telefone_cli, endereco_cli, estado_civil_cli, ponto_cli) values ('João Silva', '123.456.789-01', '1983-08-29', '19-3741-7000', 'Rua Pastor Hugo Gegembauer, 444', 'Casado', 10);
+
+insert into cliente (nome_cli, cpf_cli, data_nascto_cli, telefone_cli, endereco_cli, estado_civil_cli, ponto_cli) values ('Maria Pereira', '919.456.789-01', '1994-11-30', '19-3741-7034', 'Rua Líbero Badaró, 12', 'Solteira', 15);
+
 -- Select para testar
 select nome_fun as 'Nome', endereco_fun as 'Endereço', funcao_fun as 'Função', salario_fun as 'Salário' from funcionario;
 select descricao_pro as 'Descrição', quantidade_pro as 'Quantidade', unidade_pro as 'Unidade', preco_pro as 'Preço' from produto;
+select nome_cli as 'Nome', cpf_cli as 'CPF', endereco_cli as 'Endereço', ponto_cli as 'Pontos de Desconto' from cliente;
 
