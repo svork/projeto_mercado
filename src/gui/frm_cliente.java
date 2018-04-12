@@ -1,10 +1,100 @@
 package gui;
 
+// Importando bibliotecas
+import java.sql.*; // SQL
+import database.Banco; // Classe Banco de Dados
+import javax.swing.JOptionPane; // Janelas de Mensagens
+
 public class frm_cliente extends javax.swing.JFrame {
 
+    // Instancia da classe de Conexão
+    Banco banco;
+
+    // controlar erro de navegacao nos botoes proximo e anterior
+    int navega = 0;
+
+    // select principal
+    String sql = "select * from cliente";
+    
+    // Construtor
     public frm_cliente() {
         initComponents();
+        
+        // Criando objeto da classe Banco
+        banco = new Banco();
+
+        // Abrir conexão com o banco de dados
+        banco.connect();
+
+        // Carregar dados
+        banco.executeSQL(sql);
+        
+        try {
+            // Procura o primeiro registro no banco
+            banco.resultset.first();
+            exibir_dados();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
+    
+    // Método exibir_dados - mostra os dados na tela
+    public void exibir_dados() {
+        try {          
+            lbl_id_cli.setText(banco.resultset.getString(1)); // Código
+            txt_nome_cli.setText(banco.resultset.getString(2)); // Nome
+            txt_cpf_cli.setText(banco.resultset.getString(3)); // CPF
+            txt_dtnasc_cli.setText(banco.resultset.getString(4)); // Data Nascimento
+            txt_telefone_cli.setText(banco.resultset.getString(5)); // Telefone
+            txt_endereco_cli.setText(banco.resultset.getString(6)); // Endereço
+            txt_estado_civil_cli.setText(banco.resultset.getString(7)); // Estado Civil
+            lbl_pontos.setText(banco.resultset.getString(8)); // Pontos
+            
+        } catch (SQLException e) {
+            if (navega == 1) {
+                JOptionPane.showMessageDialog(null, "Erro!\nVocê já está no primeiro registro.\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else if (navega == 2) {
+                JOptionPane.showMessageDialog(null, "Erro!\nVocê já está no último registro.\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+                navega = 0;
+            }
+        }
+    }
+    
+    // Método salvar - cria um novo registro
+    /*public void salvar() {
+        try {
+            // Guardar informações da tela em variáveis
+            String tipo = txt_tipo.getText();
+            String nome = txt_nome.getText();
+            String cpf = txt_cpf.getText();
+            String endereco = txt_endereco.getText();
+            String data_nascto = txt_data_nascto.getText();
+            String funcao = txt_funcao.getText();
+            String telefone = txt_telefone.getText();
+            String estado_civil = txt_estado_civil.getText();
+            double salario = Double.parseDouble(txt_salario.getText());
+
+            // Comando SQL
+            String comando = "insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values "
+                    + "('" + tipo + "', '" + nome + "', '" + cpf + "', '" + endereco + "', '" + data_nascto + "', '" + funcao + "', '" + telefone + "', '" + estado_civil + "', " + salario + ")";
+
+            // Executar comando SQL
+            banco.statement.executeUpdate(comando);
+            JOptionPane.showMessageDialog(null, "Informações salvas com sucesso.", "Pronto", JOptionPane.OK_OPTION);
+
+            // Mostra o primeiro registro novamente  
+            banco.executeSQL(sql);
+            banco.resultset.first();
+            exibir_dados();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+            System.out.println("erro" +e);
+        }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
