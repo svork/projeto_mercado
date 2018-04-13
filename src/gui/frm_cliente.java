@@ -64,22 +64,23 @@ public class frm_cliente extends javax.swing.JFrame {
     }
     
     // Método salvar - cria um novo registro
-    /*public void salvar() {
+    public void salvar() {
         try {
             // Guardar informações da tela em variáveis
-            String tipo = txt_tipo.getText();
-            String nome = txt_nome.getText();
-            String cpf = txt_cpf.getText();
-            String endereco = txt_endereco.getText();
-            String data_nascto = txt_data_nascto.getText();
-            String funcao = txt_funcao.getText();
-            String telefone = txt_telefone.getText();
-            String estado_civil = txt_estado_civil.getText();
-            double salario = Double.parseDouble(txt_salario.getText());
+            String nome = txt_nome_cli.getText();
+            String cpf = txt_cpf_cli.getText();
+            String data = txt_dtnasc_cli.getText();
+            String telefone = txt_telefone_cli.getText();
+            String endereco = txt_endereco_cli.getText();
+            String estado_civil = txt_estado_civil_cli.getText();
+            int ponto = 0 ; // Um novo cliente começa com ZERO pontos de desconto
 
             // Comando SQL
-            String comando = "insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values "
-                    + "('" + tipo + "', '" + nome + "', '" + cpf + "', '" + endereco + "', '" + data_nascto + "', '" + funcao + "', '" + telefone + "', '" + estado_civil + "', " + salario + ")";
+            /*
+            insert into cliente (nome_cli, cpf_cli, data_nascto_cli, telefone_cli, endereco_cli, estado_civil_cli, ponto_cli) values ('João Silva', '123.456.789-01', '1983-08-29', '19-3741-7000', 'Rua Pastor Hugo Gegembauer, 444', 'Casado', 10);
+            */
+            String comando = "insert into cliente (nome_cli, cpf_cli, data_nascto_cli, telefone_cli, endereco_cli, estado_civil_cli, ponto_cli) values "
+                    + "('" + nome + "', '" + cpf + "', '" + data + "', '" + telefone + "', '" + endereco + "', '" + estado_civil + "', " + ponto + ")";
 
             // Executar comando SQL
             banco.statement.executeUpdate(comando);
@@ -94,7 +95,106 @@ public class frm_cliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
             System.out.println("erro" +e);
         }
-    }*/
+    }
+    
+        // Método excluir - exclui um registro
+    public void excluir() {
+        try {
+            // Busca no banco o registro atual
+            banco.executeSQL("select * from cliente where codigo_cli = " + lbl_id_cli.getText());
+            banco.resultset.first();
+
+            // Mensagem ao usuário para confirma a exclusão
+            String mensagem = "Tem certeza que deseja excluir o cliente?\n" + banco.resultset.getString(3) + "\nCPF: " + banco.resultset.getString(4);
+
+            // Verifica se o usuário clicou no SIM e deleta o cliente, se não, faz NADA
+            if (JOptionPane.showConfirmDialog(null, mensagem, "Excluir cliente?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                // Exclui o funcionário e se der certo, exibe uma mensagem ao usuário
+                if (banco.statement.executeUpdate("delete from cliente where codigo_cli = " + lbl_id_cli.getText()) == 1) {
+                    JOptionPane.showMessageDialog(null, "O cliente foi excluído com sucesso.");
+
+                    // Mostra o primeiro registro novamente                        
+                    banco.executeSQL(sql);
+                    banco.resultset.first();
+                    exibir_dados();
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir registro!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Método alterar - altera um registro
+    public void alterar() {
+        try{
+            int id = Integer.parseInt(lbl_id_cli.getText());
+            String nome = txt_nome_cli.getText();
+            String cpf = txt_cpf_cli.getText();
+            String data = txt_dtnasc_cli.getText();
+            String telefone = txt_telefone_cli.getText();
+            String endereco = txt_endereco_cli.getText();
+            String estado_civil = txt_estado_civil_cli.getText();
+            //Comando SQL
+            String comando = "update cliente "
+                    + " set nome_fun = '"+nome+"',"
+                    + " tipo_fun = '"+tipo+"', "
+                    + " cpf_fun = "+cpf+","
+                    + " endereco_fun = '"+endereco+"',"
+                    + " data_nascto_fun = '"+data_nascto+"',"
+                    + " funcao_fun = '"+funcao+"',"
+                    + " telefone_fun ="+telefone+","
+                    + " estado_civil_fun ='"+estado_civil+"',"
+                    + " salario_fun= "+salario+""
+                    + " where codigo_cli ="+id;
+            
+           // Executar comando SQL
+            banco.statement.executeUpdate(comando);
+            JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso\n" , "Pronto", JOptionPane.OK_OPTION);
+            
+            // Mostra o primeiro registro novamente  
+            banco.executeSQL(sql);
+            banco.resultset.first();
+            exibir_dados();
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao alterar informações!\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+        //Método listar_prox - exibe o próximo registro
+    public void listar_prox() {
+        try {     
+            banco.resultset.next();
+            exibir_dados();
+            navega = 2;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        } 
+    } 
+    
+    // Método listar_ant - exibe o registro anterior
+    public void listar_ant(){
+        try {     
+            banco.resultset.previous();
+            exibir_dados();
+            navega = 1;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        } 
+    }
+    
+    // Método voltar_menu - volta ao menu principal
+    public void voltar_menu(){
+        // Esse botão volta ao form Principal
+        new frm_principal().setVisible(true);
+        this.dispose();
+        
+        // Fechar a conexão com o banco
+        banco.disconnect();
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -199,7 +299,7 @@ public class frm_cliente extends javax.swing.JFrame {
         lbl_telefone_cli.setText("Telefone");
 
         lbl_email_cli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_email_cli.setText("E-mail");
+        lbl_email_cli.setText("E-mail - INATIVO, POR ENQUANTO");
 
         txt_nome_cli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,12 +320,12 @@ public class frm_cliente extends javax.swing.JFrame {
         pnl_clientesLayout.setHorizontalGroup(
             pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_clientesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_email_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(txt_dtnasc_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txt_cpf_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,28 +335,22 @@ public class frm_cliente extends javax.swing.JFrame {
                                     .addComponent(txt_estado_civil_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_telefone_cli)))
                             .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                        .addComponent(lbl_codigo_cli)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lbl_id_cli))
-                                    .addComponent(lbl_nome_cli)
-                                    .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                        .addComponent(lbl_dtnasc_cli)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(lbl_cpf_cli))
-                                    .addComponent(txt_nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                        .addComponent(txt_endereco_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txt_telefone_cli)))))
-                        .addGroup(pnl_clientesLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_endereco_cli)
-                                .addComponent(lbl_email_cli)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(lbl_codigo_cli)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_id_cli))
+                            .addComponent(lbl_nome_cli)
+                            .addGroup(pnl_clientesLayout.createSequentialGroup()
+                                .addComponent(lbl_dtnasc_cli)
+                                .addGap(43, 43, 43)
+                                .addComponent(lbl_cpf_cli))
+                            .addComponent(txt_nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnl_clientesLayout.createSequentialGroup()
+                                .addComponent(txt_endereco_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_telefone_cli)))
+                        .addComponent(lbl_endereco_cli)
+                        .addComponent(lbl_email_cli)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_clientesLayout.setVerticalGroup(
             pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,20 +389,50 @@ public class frm_cliente extends javax.swing.JFrame {
         );
 
         btn_anterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Anterior.png"))); // NOI18N
+        btn_anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anteriorActionPerformed(evt);
+            }
+        });
 
         btn_proximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Proximo.png"))); // NOI18N
+        btn_proximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_proximoActionPerformed(evt);
+            }
+        });
 
         btn_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Alterar.png"))); // NOI18N
+        btn_alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alterarActionPerformed(evt);
+            }
+        });
 
         btn_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Salvar.png"))); // NOI18N
 
         btn_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
 
         btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancelar.png"))); // NOI18N
 
         btn_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Novo.png"))); // NOI18N
+        btn_novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_novoActionPerformed(evt);
+            }
+        });
 
         btn_voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Voltar.png"))); // NOI18N
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
+            }
+        });
 
         lbl_anterior.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_anterior.setText("Anterior");
@@ -349,9 +473,7 @@ public class frm_cliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnl_clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(pnl_clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -395,19 +517,16 @@ public class frm_cliente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(lbl_voltar)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(10, 10, 10)
-                                            .addComponent(lbl_novo))
-                                        .addComponent(btn_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbl_voltar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(24, 24, 24))))))
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lbl_novo))
+                                    .addComponent(btn_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,6 +587,30 @@ public class frm_cliente extends javax.swing.JFrame {
     private void txt_endereco_cliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_endereco_cliActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_endereco_cliActionPerformed
+
+    private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
+        salvar();
+    }//GEN-LAST:event_btn_novoActionPerformed
+
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        voltar_menu();
+    }//GEN-LAST:event_btn_voltarActionPerformed
+
+    private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
+        listar_ant();
+    }//GEN-LAST:event_btn_anteriorActionPerformed
+
+    private void btn_proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proximoActionPerformed
+        listar_prox();
+    }//GEN-LAST:event_btn_proximoActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
+        alterar();
+    }//GEN-LAST:event_btn_alterarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

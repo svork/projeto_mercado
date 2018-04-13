@@ -403,7 +403,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="E-mail"/>
+            <Property name="text" type="java.lang.String" value="E-mail - INATIVO, POR ENQUANTO"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_nome_cli">
@@ -439,6 +439,9 @@
           <Image iconType="3" name="/imagens/Anterior.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_anteriorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_proximo">
       <Properties>
@@ -446,6 +449,9 @@
           <Image iconType="3" name="/imagens/Proximo.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_proximoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_alterar">
       <Properties>
@@ -453,6 +459,9 @@
           <Image iconType="3" name="/imagens/Alterar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_salvar">
       <Properties>
@@ -467,6 +476,9 @@
           <Image iconType="3" name="/imagens/Excluir.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_excluirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_cancelar">
       <Properties>
@@ -481,6 +493,9 @@
           <Image iconType="3" name="/imagens/Novo.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_novoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_voltar">
       <Properties>
@@ -488,6 +503,9 @@
           <Image iconType="3" name="/imagens/Voltar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_voltarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_anterior">
       <Properties>
