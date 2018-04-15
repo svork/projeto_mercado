@@ -142,11 +142,11 @@ public class frm_funcionario extends javax.swing.JFrame {
             String comando = "update funcionario "
                     + " set nome_fun = '"+nome+"',"
                     + " tipo_fun = '"+tipo+"', "
-                    + " cpf_fun = "+cpf+","
+                    + " cpf_fun = '"+cpf+"',"
                     + " endereco_fun = '"+endereco+"',"
                     + " data_nascto_fun = '"+data_nascto+"',"
                     + " funcao_fun = '"+funcao+"',"
-                    + " telefone_fun ="+telefone+","
+                    + " telefone_fun ='"+telefone+"',"
                     + " estado_civil_fun ='"+estado_civil+"',"
                     + " salario_fun= "+salario+""
                     + " where id_fun ="+id;

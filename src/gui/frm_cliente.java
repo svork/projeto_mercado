@@ -105,7 +105,7 @@ public class frm_cliente extends javax.swing.JFrame {
             banco.resultset.first();
 
             // Mensagem ao usuário para confirma a exclusão
-            String mensagem = "Tem certeza que deseja excluir o cliente?\n" + banco.resultset.getString(3) + "\nCPF: " + banco.resultset.getString(4);
+            String mensagem = "Tem certeza que deseja excluir o cliente?\n" + banco.resultset.getString(2) + "\nCPF: " + banco.resultset.getString(3);
 
             // Verifica se o usuário clicou no SIM e deleta o cliente, se não, faz NADA
             if (JOptionPane.showConfirmDialog(null, mensagem, "Excluir cliente?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -128,7 +128,7 @@ public class frm_cliente extends javax.swing.JFrame {
     // Método alterar - altera um registro
     public void alterar() {
         try{
-            int id = Integer.parseInt(lbl_id_cli.getText());
+            String id = lbl_id_cli.getText();
             String nome = txt_nome_cli.getText();
             String cpf = txt_cpf_cli.getText();
             String data = txt_dtnasc_cli.getText();
@@ -137,16 +137,13 @@ public class frm_cliente extends javax.swing.JFrame {
             String estado_civil = txt_estado_civil_cli.getText();
             //Comando SQL
             String comando = "update cliente "
-                    + " set nome_fun = '"+nome+"',"
-                    + " tipo_fun = '"+tipo+"', "
-                    + " cpf_fun = "+cpf+","
-                    + " endereco_fun = '"+endereco+"',"
-                    + " data_nascto_fun = '"+data_nascto+"',"
-                    + " funcao_fun = '"+funcao+"',"
-                    + " telefone_fun ="+telefone+","
-                    + " estado_civil_fun ='"+estado_civil+"',"
-                    + " salario_fun= "+salario+""
-                    + " where codigo_cli ="+id;
+                    + " set nome_cli = '"+nome+"',"
+                    + " cpf_cli = '"+cpf+"', "
+                    + " data_nascto_cli = '"+data+"',"
+                    + " telefone_cli = '"+telefone+"',"
+                    + " endereco_cli = '"+endereco+"',"                   
+                    + " estado_civil_cli ='"+estado_civil+"'"
+                    + " where codigo_cli = "+id;
             
            // Executar comando SQL
             banco.statement.executeUpdate(comando);
@@ -161,7 +158,6 @@ public class frm_cliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao alterar informações!\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
     
         //Método listar_prox - exibe o próximo registro
     public void listar_prox() {
@@ -194,7 +190,6 @@ public class frm_cliente extends javax.swing.JFrame {
         // Fechar a conexão com o banco
         banco.disconnect();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -410,6 +405,11 @@ public class frm_cliente extends javax.swing.JFrame {
         });
 
         btn_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Salvar.png"))); // NOI18N
+        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salvarActionPerformed(evt);
+            }
+        });
 
         btn_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
         btn_excluir.addActionListener(new java.awt.event.ActionListener() {
@@ -419,6 +419,11 @@ public class frm_cliente extends javax.swing.JFrame {
         });
 
         btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancelar.png"))); // NOI18N
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
 
         btn_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Novo.png"))); // NOI18N
         btn_novo.addActionListener(new java.awt.event.ActionListener() {
@@ -611,6 +616,14 @@ public class frm_cliente extends javax.swing.JFrame {
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
         alterar();
     }//GEN-LAST:event_btn_alterarActionPerformed
+
+    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
+        alterar();
+    }//GEN-LAST:event_btn_salvarActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        voltar_menu();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
