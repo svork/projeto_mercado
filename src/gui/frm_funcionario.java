@@ -18,7 +18,10 @@ public class frm_funcionario extends javax.swing.JFrame {
 
     // Construtor
     public frm_funcionario() {
-        initComponents();     
+        initComponents();    
+        
+        btn_salvar.setEnabled(false);
+        btn_cancelar.setEnabled(false);
 
         // Criando objeto da classe Banco
         banco = new Banco();
@@ -66,6 +69,11 @@ public class frm_funcionario extends javax.swing.JFrame {
     // Método salvar - cria um novo registro
     public void salvar() {
         try {
+            btn_alterar.setEnabled(true);
+            btn_anterior.setEnabled(true);
+            btn_proximo.setEnabled(true);
+            btn_excluir.setEnabled(true);
+                      
             // Guardar informações da tela em variáveis
             String tipo = txt_tipo.getText();
             String nome = txt_nome.getText();
@@ -78,7 +86,7 @@ public class frm_funcionario extends javax.swing.JFrame {
             double salario = Double.parseDouble(txt_salario.getText());
 
             // Comando SQL
-            String comando = "insert into funcionario (id_tipo, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values "
+            String comando = "insert into funcionario (tipo_fun, nome_fun, cpf_fun, endereco_fun, data_nascto_fun, funcao_fun, telefone_fun, estado_civil_fun, salario_fun) values "
                     + "('" + tipo + "', '" + nome + "', '" + cpf + "', '" + endereco + "', '" + data_nascto + "', '" + funcao + "', '" + telefone + "', '" + estado_civil + "', " + salario + ")";
 
             // Executar comando SQL
@@ -89,6 +97,9 @@ public class frm_funcionario extends javax.swing.JFrame {
             banco.executeSQL(sql);
             banco.resultset.first();
             exibir_dados();
+            
+            btn_salvar.setEnabled(false);
+            btn_cancelar.setEnabled(false);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -234,6 +245,10 @@ public class frm_funcionario extends javax.swing.JFrame {
         txt_telefone = new javax.swing.JTextField();
         lbl_telefone = new javax.swing.JLabel();
         lbl_cpf = new javax.swing.JLabel();
+        btn_novo = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
+        lbl_cancelar = new javax.swing.JLabel();
+        lbl_novo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Funcionários");
@@ -297,7 +312,7 @@ public class frm_funcionario extends javax.swing.JFrame {
             }
         });
 
-        lbl_voltar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        lbl_voltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_voltar.setText("Voltar");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Funcionário"));
@@ -432,49 +447,79 @@ public class frm_funcionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btn_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Novo.png"))); // NOI18N
+        btn_novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_novoActionPerformed(evt);
+            }
+        });
+
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancelar.png"))); // NOI18N
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+
+        lbl_cancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_cancelar.setText("Cancelar");
+
+        lbl_novo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_novo.setText("Novo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_proximo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_anterior)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_proximo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_anterior)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_proximo)))
                         .addGap(18, 18, 18)
-                        .addComponent(lbl_proximo)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lbl_alterar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbl_excluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_salvar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_alterar)
+                                .addGap(25, 25, 25)
+                                .addComponent(lbl_excluir)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_salvar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_cancelar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lbl_novo))
+                            .addComponent(btn_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(lbl_voltar)))
-                .addGap(19, 19, 19))
+                        .addComponent(lbl_voltar))
+                    .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,22 +535,26 @@ public class frm_funcionario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_anterior)
-                            .addComponent(lbl_proximo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_voltar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_proximo)
                             .addComponent(lbl_alterar)
                             .addComponent(lbl_excluir)
                             .addComponent(lbl_salvar)))
-                    .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_cancelar)
+                            .addComponent(lbl_novo))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_voltar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -513,7 +562,7 @@ public class frm_funcionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        salvar();
+        salvar();  
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     private void txt_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tipoActionPerformed
@@ -539,6 +588,44 @@ public class frm_funcionario extends javax.swing.JFrame {
     private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
         voltar_menu();
     }//GEN-LAST:event_btn_voltarActionPerformed
+
+    private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
+        //Habilitando botões
+        btn_cancelar.setEnabled(true);
+        btn_salvar.setEnabled(true);
+        
+        //Desabilitando botões
+        btn_anterior.setEnabled(false);
+        btn_proximo.setEnabled(false);
+        btn_alterar.setEnabled(false);
+        btn_excluir.setEnabled(false);
+        
+        //Limpando o texto
+        txt_nome.setText(null);
+        txt_cpf.setText(null);
+        txt_data_nascto.setText(null);
+        txt_endereco.setText(null);
+        txt_estado_civil.setText(null);
+        txt_funcao.setText(null);
+        txt_salario.setText(null);
+        txt_telefone.setText(null);
+        txt_tipo.setText(null);
+        lbl_id.setText(null);
+    }//GEN-LAST:event_btn_novoActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        //Habilitando botões
+        btn_anterior.setEnabled(true);
+        btn_proximo.setEnabled(true);
+        btn_alterar.setEnabled(true);
+        btn_excluir.setEnabled(true);
+        
+        //Desabilitando botões
+        btn_cancelar.setEnabled(false);
+        btn_salvar.setEnabled(false);
+        
+        exibir_dados();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -576,13 +663,16 @@ public class frm_funcionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_alterar;
     private javax.swing.JButton btn_anterior;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_novo;
     private javax.swing.JButton btn_proximo;
     private javax.swing.JButton btn_salvar;
     private javax.swing.JButton btn_voltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_alterar;
     private javax.swing.JLabel lbl_anterior;
+    private javax.swing.JLabel lbl_cancelar;
     private javax.swing.JLabel lbl_codigo;
     private javax.swing.JLabel lbl_cpf;
     private javax.swing.JLabel lbl_data_nascto;
@@ -592,6 +682,7 @@ public class frm_funcionario extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_funcao;
     private javax.swing.JLabel lbl_id;
     private javax.swing.JLabel lbl_nome;
+    private javax.swing.JLabel lbl_novo;
     private javax.swing.JLabel lbl_proximo;
     private javax.swing.JLabel lbl_salario;
     private javax.swing.JLabel lbl_salvar;

@@ -6,7 +6,7 @@ import database.Banco; // Classe Banco de Dados
 import javax.swing.JOptionPane; // Janelas de Mensagens
 
 public class frm_cliente extends javax.swing.JFrame {
-
+    
     // Instancia da classe de Conexão
     Banco banco;
 
@@ -19,6 +19,9 @@ public class frm_cliente extends javax.swing.JFrame {
     // Construtor
     public frm_cliente() {
         initComponents();
+        
+        btn_salvar.setEnabled(false);
+        btn_cancelar.setEnabled(false);
         
         // Criando objeto da classe Banco
         banco = new Banco();
@@ -66,6 +69,11 @@ public class frm_cliente extends javax.swing.JFrame {
     // Método salvar - cria um novo registro
     public void salvar() {
         try {
+            btn_alterar.setEnabled(true);
+            btn_anterior.setEnabled(true);
+            btn_proximo.setEnabled(true);
+            btn_excluir.setEnabled(true);
+            
             // Guardar informações da tela em variáveis
             String nome = txt_nome_cli.getText();
             String cpf = txt_cpf_cli.getText();
@@ -90,7 +98,10 @@ public class frm_cliente extends javax.swing.JFrame {
             banco.executeSQL(sql);
             banco.resultset.first();
             exibir_dados();
-
+            
+            btn_salvar.setEnabled(false);
+            btn_cancelar.setEnabled(false);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
             System.out.println("erro" +e);
@@ -217,7 +228,6 @@ public class frm_cliente extends javax.swing.JFrame {
         lbl_cpf_cli = new javax.swing.JLabel();
         lbl_endereco_cli = new javax.swing.JLabel();
         lbl_telefone_cli = new javax.swing.JLabel();
-        lbl_email_cli = new javax.swing.JLabel();
         txt_nome_cli = new javax.swing.JTextField();
         txt_dtnasc_cli = new javax.swing.JTextField();
         txt_cpf_cli = new javax.swing.JTextField();
@@ -225,7 +235,6 @@ public class frm_cliente extends javax.swing.JFrame {
         lbl_id_cli = new javax.swing.JLabel();
         txt_endereco_cli = new javax.swing.JTextField();
         txt_telefone_cli = new javax.swing.JTextField();
-        txt_email_cli = new javax.swing.JTextField();
         btn_anterior = new javax.swing.JButton();
         btn_proximo = new javax.swing.JButton();
         btn_alterar = new javax.swing.JButton();
@@ -269,6 +278,7 @@ public class frm_cliente extends javax.swing.JFrame {
         lbl_telefone.setText("Telefone");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Cliente");
 
         pnl_clientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Clientes"));
 
@@ -293,9 +303,6 @@ public class frm_cliente extends javax.swing.JFrame {
         lbl_telefone_cli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_telefone_cli.setText("Telefone");
 
-        lbl_email_cli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_email_cli.setText("E-mail - INATIVO, POR ENQUANTO");
-
         txt_nome_cli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nome_cliActionPerformed(evt);
@@ -316,35 +323,32 @@ public class frm_cliente extends javax.swing.JFrame {
             pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_clientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_email_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                .addComponent(txt_dtnasc_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_cpf_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_estado_civil_cli)
-                                    .addComponent(txt_estado_civil_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_telefone_cli)))
-                            .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                .addComponent(lbl_codigo_cli)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_id_cli))
-                            .addComponent(lbl_nome_cli)
-                            .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                .addComponent(lbl_dtnasc_cli)
-                                .addGap(43, 43, 43)
-                                .addComponent(lbl_cpf_cli))
-                            .addComponent(txt_nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnl_clientesLayout.createSequentialGroup()
-                                .addComponent(txt_endereco_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_telefone_cli)))
-                        .addComponent(lbl_endereco_cli)
-                        .addComponent(lbl_email_cli)))
+                .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnl_clientesLayout.createSequentialGroup()
+                            .addComponent(txt_dtnasc_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txt_cpf_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbl_estado_civil_cli)
+                                .addComponent(txt_estado_civil_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_telefone_cli)))
+                        .addGroup(pnl_clientesLayout.createSequentialGroup()
+                            .addComponent(lbl_codigo_cli)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lbl_id_cli))
+                        .addComponent(lbl_nome_cli)
+                        .addGroup(pnl_clientesLayout.createSequentialGroup()
+                            .addComponent(lbl_dtnasc_cli)
+                            .addGap(43, 43, 43)
+                            .addComponent(lbl_cpf_cli))
+                        .addComponent(txt_nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnl_clientesLayout.createSequentialGroup()
+                            .addComponent(txt_endereco_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_telefone_cli)))
+                    .addComponent(lbl_endereco_cli))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_clientesLayout.setVerticalGroup(
@@ -376,11 +380,7 @@ public class frm_cliente extends javax.swing.JFrame {
                 .addGroup(pnl_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_endereco_cli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_telefone_cli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_email_cli)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_email_cli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(70, 70, 70))
         );
 
         btn_anterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Anterior.png"))); // NOI18N
@@ -537,11 +537,11 @@ public class frm_cliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(pnl_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_pontos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnl_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_proximo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -578,7 +578,7 @@ public class frm_cliente extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(lbl_pontuacao)))))
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -594,7 +594,25 @@ public class frm_cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_endereco_cliActionPerformed
 
     private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
-        salvar();
+        //Habilitando botões
+        btn_cancelar.setEnabled(true);
+        btn_salvar.setEnabled(true);
+        
+        //Desabilitando botões
+        btn_anterior.setEnabled(false);
+        btn_proximo.setEnabled(false);
+        btn_alterar.setEnabled(false);
+        btn_excluir.setEnabled(false);
+        
+        //Limpando o texto
+        txt_cpf_cli.setText(null);
+        txt_dtnasc_cli.setText(null);
+        txt_endereco_cli.setText(null);
+        txt_estado_civil_cli.setText(null);
+        txt_nome_cli.setText(null);
+        txt_telefone_cli.setText(null);
+        lbl_id_cli.setText(null);
+        lbl_pontos.setText(null);
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
@@ -618,11 +636,21 @@ public class frm_cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        alterar();
+        salvar();
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        voltar_menu();
+        //Habilitando botões
+        btn_anterior.setEnabled(true);
+        btn_proximo.setEnabled(true);
+        btn_alterar.setEnabled(true);
+        btn_excluir.setEnabled(true);
+        
+        //Desabilitando botões
+        btn_cancelar.setEnabled(false);
+        btn_salvar.setEnabled(false);
+        
+        exibir_dados();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     public static void main(String args[]) {
@@ -675,7 +703,6 @@ public class frm_cliente extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_cpf_cli;
     private javax.swing.JLabel lbl_data_nascto;
     private javax.swing.JLabel lbl_dtnasc_cli;
-    private javax.swing.JLabel lbl_email_cli;
     private javax.swing.JLabel lbl_endereco;
     private javax.swing.JLabel lbl_endereco_cli;
     private javax.swing.JLabel lbl_estado_civil;
@@ -698,7 +725,6 @@ public class frm_cliente extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cpf_cli;
     private javax.swing.JTextField txt_data_nascto;
     private javax.swing.JTextField txt_dtnasc_cli;
-    private javax.swing.JTextField txt_email_cli;
     private javax.swing.JTextField txt_endereco;
     private javax.swing.JTextField txt_endereco_cli;
     private javax.swing.JTextField txt_estado_civil;
