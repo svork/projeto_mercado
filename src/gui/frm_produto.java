@@ -79,39 +79,7 @@ public class frm_produto extends javax.swing.JFrame {
             }
         }
     }
-    
-    // Método salvar - cria um novo registro
-    /*public void salvar() {
-        try {
-            // Guardar informações da tela em variáveis
-            String nome = txt_nome.getText();
-            String descricao = txt_descricao.getText();
-            double quantidade = Double.parseDouble(txt_quantidade.getText());
-            String unidade = txt_unidade.getText();
-            String fornecedor = txt_fornecedor.getText();
-            int ponto = Integer.parseInt(txt_ponto.getText());
-            String categoria = txt_categoria.getText();
-            double preco = Double.parseDouble(txt_preco.getText());
-
-            // Comando SQL
-            String comando = "insert into produto (nome_pro, descricao_pro, quantidade_pro, unidade_pro, fornecedor_pro, ponto_pro, categoria_pro, preco_pro) values "
-            + "('" + nome + "', '" + descricao + "', " + quantidade + ", '" + unidade + "', '" + fornecedor + "', " + ponto + ", '" + categoria + "', " + preco + ")";
-
-            // Executar comando SQL
-            banco.statement.executeUpdate(comando);
-            JOptionPane.showMessageDialog(null, "Informações salvas com sucesso.", "Pronto", JOptionPane.OK_OPTION);
-
-            // Mostra o primeiro registro novamente  
-            banco.executeSQL(sql);
-            banco.resultset.first();
-            exibir_dados();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar informações!\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
-            System.out.println("erro" +e);
-        }
-    }*/
-    
+        
     // Método excluir - exclui um registro
     public void excluir() {
         try {

@@ -19,6 +19,7 @@ public class frm_principal extends javax.swing.JFrame {
         btn_funcionario = new javax.swing.JButton();
         btn_produto = new javax.swing.JButton();
         btn_cliente = new javax.swing.JButton();
+        btn_venda = new javax.swing.JButton();
         BackGround = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -62,6 +63,7 @@ public class frm_principal extends javax.swing.JFrame {
         });
         getContentPane().add(btn_funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 150, 120));
 
+        btn_produto.setBackground(new java.awt.Color(255, 255, 255));
         btn_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastroProduto.png"))); // NOI18N
         btn_produto.setText("Cadastro de Produto");
         btn_produto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -73,6 +75,7 @@ public class frm_principal extends javax.swing.JFrame {
         });
         getContentPane().add(btn_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 150, 120));
 
+        btn_cliente.setBackground(new java.awt.Color(255, 255, 255));
         btn_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CadastroCliente.png"))); // NOI18N
         btn_cliente.setText("Cadastro de Clientes");
         btn_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -83,6 +86,18 @@ public class frm_principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 150, 120));
+
+        btn_venda.setBackground(new java.awt.Color(255, 255, 255));
+        btn_venda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Pagamentos.png"))); // NOI18N
+        btn_venda.setText("Realizar Venda");
+        btn_venda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_venda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_venda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_vendaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 150, 120));
 
         BackGround.setBackground(new java.awt.Color(255, 255, 255));
         BackGround.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -135,11 +150,11 @@ public class frm_principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_sairActionPerformed
 
-    private void btn_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_funcionarioActionPerformed
+    private void btn_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vendaActionPerformed
         // Esse botão chama o form de cadastro de Funcionários
-        new frm_funcionario().setVisible(true);
+        new frm_venda().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btn_funcionarioActionPerformed
+    }//GEN-LAST:event_btn_vendaActionPerformed
 
     private void menu_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_sairActionPerformed
         // Botão pergunta se o usuário quer realmente sair do programa
@@ -170,6 +185,10 @@ public class frm_principal extends javax.swing.JFrame {
        new frm_cliente().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_clienteActionPerformed
+
+    private void btn_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_funcionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_funcionarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +231,7 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JButton btn_funcionario;
     private javax.swing.JButton btn_produto;
     private javax.swing.JButton btn_sair;
+    private javax.swing.JButton btn_venda;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
