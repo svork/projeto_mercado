@@ -75,6 +75,31 @@ insert into cliente (nome_cli, cpf_cli, data_nascto_cli, telefone_cli, endereco_
 
 insert into cliente (nome_cli, cpf_cli, data_nascto_cli, telefone_cli, endereco_cli, estado_civil_cli, ponto_cli) values ('Maria Pereira', '919.456.789-01', '1994-11-30', '19-3741-7034', 'Rua Líbero Badaró, 12', 'Solteira', 15);
 
+-- Criar tabela de vendas
+create table venda (
+  id_venda int unsigned primary key auto_increment not null,
+  id_cliente int unsigned not null,
+  id_funcionario int unsigned not null,
+  data_venda date not null, 
+  valor_venda decimal(10,2) not null
+);
+
+-- Insert para testar
+insert into venda (id_cliente, id_funcionario, data_venda, valor_venda) values (1, 1, '2018-05-01', 34.89);
+
+-- Criar tabela de lista de produtos
+create table lista_produto (
+  id_lista int unsigned primary key auto_increment not null,
+  id_venda int unsigned not null, 
+  foreign key (id_venda) references venda (id_venda), 
+  id_produto int unsigned not null, 
+  quantidade_pro decimal(10,2) not null, 
+  preco_pro decimal(10,2) not null
+);
+
+-- Insert para testar
+insert into lista_produto (id_venda, id_produto, quantidade_pro, preco_pro) values (1, 1, 12.00, 11.99);
+
 -- Select para testar
 select nome_fun as 'Nome', endereco_fun as 'Endereço', funcao_fun as 'Função', salario_fun as 'Salário' from funcionario;
 select descricao_pro as 'Descrição', quantidade_pro as 'Quantidade', unidade_pro as 'Unidade', preco_pro as 'Preço' from produto;

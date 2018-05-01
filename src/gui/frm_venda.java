@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import database.Banco;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Renan
- */
+
 public class frm_venda extends javax.swing.JFrame {
 
     // Instancia da classe de Conexão
@@ -47,12 +39,16 @@ public class frm_venda extends javax.swing.JFrame {
     }
     
     // Método logar
-    public void Logar() {
+    public void logar() {
+        try {
         String login = txt_login.getText();
         
         String sql = "select * from funcionario where id_fun = "+ login;
         
         lbl_cliente.setText(banco.resultset.getString(1)); // Nome
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
         
     }
 
@@ -301,8 +297,7 @@ public class frm_venda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        Logar();
+        logar();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

@@ -187,7 +187,8 @@ public class frm_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clienteActionPerformed
 
     private void btn_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_funcionarioActionPerformed
-        // TODO add your handling code here:
+        new frm_funcionario().setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_btn_funcionarioActionPerformed
 
     /**
