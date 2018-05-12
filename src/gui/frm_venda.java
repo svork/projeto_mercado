@@ -36,7 +36,7 @@ public class frm_venda extends javax.swing.JFrame {
         
         String sql = "select * from funcionario where id_fun = "+ login;
         
-        lbl_cliente.setText(banco.resultset.getString(1)); // Nome
+        lbl_nome_cliente.setText(banco.resultset.getString(1)); // Nome
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
         }
@@ -56,9 +56,6 @@ public class frm_venda extends javax.swing.JFrame {
     // Método buscar_produto - recebe o código de um produto e busca no banco 
     public void buscar_produto(int codigo){
         try{
-            // Receber o valor digitado e guardar em uma variável
-            //codigo = Integer.parseInt(txt_codigo_produto.getText());
-            
             //Comando SQL
             String comando = "select descricao_pro, preco_pro from produto where codigo_pro = " + codigo;
             
@@ -79,6 +76,36 @@ public class frm_venda extends javax.swing.JFrame {
         }
         
     }
+    
+    // Método pontos_desconto - Mostra a quantidade de pontos do cliente
+    public void buscar_cliente(int codigo){
+        try{
+            //Comando SQL
+            String comando = "select nome_cli, ponto_cli from cliente where codigo_cli =" + codigo;
+            
+            // Executar comando SQL
+            banco.executeSQL(comando);
+                       
+            // Mostra o primeiro registro novamente  
+            banco.resultset.first();
+            
+            // Mostrar informações nos campos Nome e Pontos do Cliente
+            lbl_nome_cliente.setText(banco.resultset.getString(1));
+            lbl_pontos_cliente.setText("Pontos: " + banco.resultset.getString(2));
+            
+            // Regra de Negócio, cada ponto vale R$ 1,00 de desconto
+            lbl_valor_desconto_cliente.setText("Desconto R$: " + banco.resultset.getString(2) + ",00");
+            
+        }catch(SQLException e){
+            // Se algo der errado, limpar o código do cliente e mostrar mensagem de erro
+            txt_codigo_cliente.setText("");
+            JOptionPane.showMessageDialog(null, "Erro! Cliente não encontrado\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+            
+            
+            
+            
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,7 +115,7 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_quantidade_produto_venda = new javax.swing.JLabel();
         txt_observacoes_venda = new javax.swing.JTextField();
         txt_descricao_produto = new javax.swing.JTextField();
-        lbl_codigo_cliente = new javax.swing.JLabel();
+        lbl_titulo = new javax.swing.JLabel();
         lbl_descricao_produto_venda = new javax.swing.JLabel();
         lbl_valor_unitario_produto_venda = new javax.swing.JLabel();
         lbl_valor_venda = new javax.swing.JLabel();
@@ -103,8 +130,8 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_hora_venda = new javax.swing.JLabel();
         lbl_funcionario = new javax.swing.JLabel();
         btn_voltar = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
-        lbl_cliente = new javax.swing.JLabel();
+        lbl_pontos_cliente = new javax.swing.JLabel();
+        lbl_nome_cliente = new javax.swing.JLabel();
         btn_pesquisar_codigo_produto = new javax.swing.JButton();
         txt_valor_unitario_produto = new javax.swing.JTextField();
         txt_quantidade_produto = new javax.swing.JTextField();
@@ -113,11 +140,14 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_rodape_venda = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lbl_pontos_cliente = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbl_pontos_cliente_cabecalho = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btn_incluir_produto = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
+        btn_pontos_descontos = new javax.swing.JButton();
+        btn_buscar_codigo_cliente = new javax.swing.JButton();
+        txt_codigo_cliente = new javax.swing.JTextField();
+        lbl_valor_desconto_cliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -138,7 +168,7 @@ public class frm_venda extends javax.swing.JFrame {
                 btn_logarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_logar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 8, 100, 20));
+        getContentPane().add(btn_logar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 100, 20));
 
         lbl_quantidade_produto_venda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_quantidade_produto_venda.setForeground(new java.awt.Color(0, 51, 204));
@@ -158,10 +188,10 @@ public class frm_venda extends javax.swing.JFrame {
         txt_descricao_produto.setFocusable(false);
         getContentPane().add(txt_descricao_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 620, -1));
 
-        lbl_codigo_cliente.setFont(new java.awt.Font("BrowalliaUPC", 1, 24)); // NOI18N
-        lbl_codigo_cliente.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_codigo_cliente.setText("Código do cliente:");
-        getContentPane().add(lbl_codigo_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 1, -1, -1));
+        lbl_titulo.setFont(new java.awt.Font("BrowalliaUPC", 1, 24)); // NOI18N
+        lbl_titulo.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_titulo.setText("Green Market System - Vendas");
+        getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, -1, -1));
 
         lbl_descricao_produto_venda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_descricao_produto_venda.setForeground(new java.awt.Color(0, 51, 204));
@@ -211,7 +241,7 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_data_venda.setForeground(new java.awt.Color(153, 153, 153));
         lbl_data_venda.setText("20/04/2018");
         getContentPane().add(lbl_data_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 180, -1, -1));
-        getContentPane().add(txt_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 7, 60, -1));
+        getContentPane().add(txt_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 60, -1));
 
         lbl_hora_venda.setForeground(new java.awt.Color(153, 153, 153));
         lbl_hora_venda.setText("22:59");
@@ -234,15 +264,15 @@ public class frm_venda extends javax.swing.JFrame {
         });
         getContentPane().add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 540, 150, 50));
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel22.setText("Pontos:");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, -1, -1));
+        lbl_pontos_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_pontos_cliente.setForeground(new java.awt.Color(0, 51, 102));
+        lbl_pontos_cliente.setText("Pontos:");
+        getContentPane().add(lbl_pontos_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, -1, -1));
 
-        lbl_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbl_cliente.setForeground(new java.awt.Color(0, 51, 102));
-        lbl_cliente.setText("Nome do cliente");
-        getContentPane().add(lbl_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 335, -1, -1));
+        lbl_nome_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_nome_cliente.setForeground(new java.awt.Color(0, 51, 102));
+        lbl_nome_cliente.setText("Nome do cliente");
+        getContentPane().add(lbl_nome_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 335, -1, -1));
 
         btn_pesquisar_codigo_produto.setForeground(new java.awt.Color(255, 255, 255));
         btn_pesquisar_codigo_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/botao2.png"))); // NOI18N
@@ -277,11 +307,8 @@ public class frm_venda extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pagamento.png"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        lbl_pontos_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar5.png"))); // NOI18N
-        getContentPane().add(lbl_pontos_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 320, 170, 120));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar3.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, -1));
+        lbl_pontos_cliente_cabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar5.png"))); // NOI18N
+        getContentPane().add(lbl_pontos_cliente_cabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 320, 170, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar1.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, -1, -1));
@@ -294,6 +321,23 @@ public class frm_venda extends javax.swing.JFrame {
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar5.png"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 170, 120));
+
+        btn_pontos_descontos.setText("Usar Pontos");
+        getContentPane().add(btn_pontos_descontos, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 440, -1, -1));
+
+        btn_buscar_codigo_cliente.setText("Buscar Cliente");
+        btn_buscar_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscar_codigo_clienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_buscar_codigo_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 270, -1, -1));
+
+        txt_codigo_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txt_codigo_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, 100, -1));
+
+        lbl_valor_desconto_cliente.setText("Desconto R$: ");
+        getContentPane().add(lbl_valor_desconto_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 410, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -326,6 +370,19 @@ public class frm_venda extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn_pesquisar_codigo_produtoActionPerformed
+
+    private void btn_buscar_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscar_codigo_clienteActionPerformed
+        // Este método aceita apenas numeros inteiros como código do produtp
+        try {
+            int codigo = Integer.parseInt(txt_codigo_cliente.getText());
+            buscar_cliente(codigo);
+        }
+        catch (Exception e){
+            // Se algo der errado, limpar o código do produto e mostrar mensagem de erro
+            txt_codigo_cliente.setText("");
+            JOptionPane.showMessageDialog(null, "Erro! Código Inválido!\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_buscar_codigo_clienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,35 +420,38 @@ public class frm_venda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscar_codigo_cliente;
     private javax.swing.JButton btn_confirmar;
     private javax.swing.JButton btn_incluir_produto;
     private javax.swing.JButton btn_logar;
     private javax.swing.JButton btn_pesquisar_codigo_produto;
+    private javax.swing.JButton btn_pontos_descontos;
     private javax.swing.JButton btn_voltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lbl_cabecalho_venda;
-    private javax.swing.JLabel lbl_cliente;
-    private javax.swing.JLabel lbl_codigo_cliente;
     private javax.swing.JLabel lbl_codigo_produto;
     private javax.swing.JLabel lbl_data_venda;
     private javax.swing.JLabel lbl_descricao_produto;
     private javax.swing.JLabel lbl_descricao_produto_venda;
     private javax.swing.JLabel lbl_funcionario;
     private javax.swing.JLabel lbl_hora_venda;
+    private javax.swing.JLabel lbl_nome_cliente;
     private javax.swing.JLabel lbl_numero_venda;
     private javax.swing.JLabel lbl_pontos_cliente;
+    private javax.swing.JLabel lbl_pontos_cliente_cabecalho;
     private javax.swing.JLabel lbl_quantidade_produto;
     private javax.swing.JLabel lbl_quantidade_produto_venda;
     private javax.swing.JLabel lbl_rodape_venda;
+    private javax.swing.JLabel lbl_titulo;
     private javax.swing.JLabel lbl_total_palavra;
+    private javax.swing.JLabel lbl_valor_desconto_cliente;
     private javax.swing.JLabel lbl_valor_unitario_produto;
     private javax.swing.JLabel lbl_valor_unitario_produto_venda;
     private javax.swing.JLabel lbl_valor_venda;
+    private javax.swing.JTextField txt_codigo_cliente;
     private javax.swing.JTextField txt_codigo_produto;
     private javax.swing.JTextField txt_descricao_produto;
     private javax.swing.JTextField txt_login;
