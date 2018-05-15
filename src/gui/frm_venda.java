@@ -5,7 +5,6 @@ import database.Banco;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 public class frm_venda extends javax.swing.JFrame {
 
     // Instancia da classe de Conexão
@@ -27,6 +26,7 @@ public class frm_venda extends javax.swing.JFrame {
         // Campos que não devem ser alterados, somente leitura
         txt_descricao_produto.setEditable(false);
         txt_valor_unitario_produto.setEditable(false);
+        
     }
     
     // Método logar - faz o login de um funcionario
@@ -112,18 +112,14 @@ public class frm_venda extends javax.swing.JFrame {
 
         lbl_total_palavra = new javax.swing.JLabel();
         btn_logar = new javax.swing.JButton();
-        lbl_quantidade_produto_venda = new javax.swing.JLabel();
         txt_observacoes_venda = new javax.swing.JTextField();
         txt_descricao_produto = new javax.swing.JTextField();
         lbl_titulo = new javax.swing.JLabel();
-        lbl_descricao_produto_venda = new javax.swing.JLabel();
-        lbl_valor_unitario_produto_venda = new javax.swing.JLabel();
         lbl_valor_venda = new javax.swing.JLabel();
         lbl_codigo_produto = new javax.swing.JLabel();
         lbl_valor_unitario_produto = new javax.swing.JLabel();
         lbl_quantidade_produto = new javax.swing.JLabel();
         lbl_descricao_produto = new javax.swing.JLabel();
-        lbl_cabecalho_venda = new javax.swing.JLabel();
         lbl_numero_venda = new javax.swing.JLabel();
         lbl_data_venda = new javax.swing.JLabel();
         txt_login = new javax.swing.JTextField();
@@ -148,6 +144,8 @@ public class frm_venda extends javax.swing.JFrame {
         btn_buscar_codigo_cliente = new javax.swing.JButton();
         txt_codigo_cliente = new javax.swing.JTextField();
         lbl_valor_desconto_cliente = new javax.swing.JLabel();
+        painel_tabela = new javax.swing.JScrollPane();
+        tabela_lista_produto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -170,11 +168,6 @@ public class frm_venda extends javax.swing.JFrame {
         });
         getContentPane().add(btn_logar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 100, 20));
 
-        lbl_quantidade_produto_venda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_quantidade_produto_venda.setForeground(new java.awt.Color(0, 51, 204));
-        lbl_quantidade_produto_venda.setText("Qtde.");
-        getContentPane().add(lbl_quantidade_produto_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
-
         txt_observacoes_venda.setForeground(new java.awt.Color(204, 204, 204));
         txt_observacoes_venda.setText("Observações");
         txt_observacoes_venda.addActionListener(new java.awt.event.ActionListener() {
@@ -192,16 +185,6 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_titulo.setForeground(new java.awt.Color(255, 255, 255));
         lbl_titulo.setText("Green Market System - Vendas");
         getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, -1, -1));
-
-        lbl_descricao_produto_venda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_descricao_produto_venda.setForeground(new java.awt.Color(0, 51, 204));
-        lbl_descricao_produto_venda.setText("Produto");
-        getContentPane().add(lbl_descricao_produto_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
-
-        lbl_valor_unitario_produto_venda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl_valor_unitario_produto_venda.setForeground(new java.awt.Color(0, 51, 204));
-        lbl_valor_unitario_produto_venda.setText("Valor unitário");
-        getContentPane().add(lbl_valor_unitario_produto_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
 
         lbl_valor_venda.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         lbl_valor_venda.setForeground(new java.awt.Color(255, 255, 255));
@@ -228,9 +211,6 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_descricao_produto.setForeground(new java.awt.Color(51, 102, 255));
         lbl_descricao_produto.setText("Produto");
         getContentPane().add(lbl_descricao_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-
-        lbl_cabecalho_venda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/sub.png"))); // NOI18N
-        getContentPane().add(lbl_cabecalho_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 800, 40));
 
         lbl_numero_venda.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_numero_venda.setForeground(new java.awt.Color(0, 51, 102));
@@ -339,6 +319,125 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_valor_desconto_cliente.setText("Desconto R$: ");
         getContentPane().add(lbl_valor_desconto_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 410, -1, -1));
 
+        tabela_lista_produto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ITEM", "QTDE", "PONTOS", "PRODUTO", "VLR UNIT R$", "SUB-TOTAL"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        painel_tabela.setViewportView(tabela_lista_produto);
+
+        getContentPane().add(painel_tabela, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 770, 440));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -431,11 +530,9 @@ public class frm_venda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lbl_cabecalho_venda;
     private javax.swing.JLabel lbl_codigo_produto;
     private javax.swing.JLabel lbl_data_venda;
     private javax.swing.JLabel lbl_descricao_produto;
-    private javax.swing.JLabel lbl_descricao_produto_venda;
     private javax.swing.JLabel lbl_funcionario;
     private javax.swing.JLabel lbl_hora_venda;
     private javax.swing.JLabel lbl_nome_cliente;
@@ -443,14 +540,14 @@ public class frm_venda extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_pontos_cliente;
     private javax.swing.JLabel lbl_pontos_cliente_cabecalho;
     private javax.swing.JLabel lbl_quantidade_produto;
-    private javax.swing.JLabel lbl_quantidade_produto_venda;
     private javax.swing.JLabel lbl_rodape_venda;
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JLabel lbl_total_palavra;
     private javax.swing.JLabel lbl_valor_desconto_cliente;
     private javax.swing.JLabel lbl_valor_unitario_produto;
-    private javax.swing.JLabel lbl_valor_unitario_produto_venda;
     private javax.swing.JLabel lbl_valor_venda;
+    private javax.swing.JScrollPane painel_tabela;
+    private javax.swing.JTable tabela_lista_produto;
     private javax.swing.JTextField txt_codigo_cliente;
     private javax.swing.JTextField txt_codigo_produto;
     private javax.swing.JTextField txt_descricao_produto;
