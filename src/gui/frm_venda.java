@@ -87,7 +87,25 @@ public class frm_venda extends javax.swing.JFrame {
     }
     
     // Método usar_pontos_desconto - Usa os pontos do cliente para dar desconto no valor total
+    // Falta testar
     public void usar_pontos_desconto(){
+        
+        // Armazena o codigo pesquisado em uma variável
+        String codigo = txt_codigo_cliente.getText();
+        
+        // Declaração de variáveis e calculo de desconto
+        int totalinicial, desconto, totalfinal;
+        totalinicial =  Integer.parseInt(lbl_valor_venda.getText());
+        desconto = Integer.parseInt(lbl_desconto.getText());
+        totalfinal = totalinicial-desconto;
+        
+        // Passa o valor com desconto no lbl
+        lbl_valor_venda.setText(Integer.toString(totalfinal));
+        
+        // Update no banco referente a atualização depois de usar os pontos
+        String comando = "update cliente, set ponto_cli = 0 , where ponto_cli = " + codigo;
+        // Executar comando SQL
+        banco.executeSQL(comando);
         
     }
     
@@ -140,6 +158,7 @@ public class frm_venda extends javax.swing.JFrame {
         painel_tabela = new javax.swing.JScrollPane();
         tabela_lista_produto = new javax.swing.JTable();
         lbl_codigo_cliente = new javax.swing.JLabel();
+        lbl_desconto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -244,7 +263,7 @@ public class frm_venda extends javax.swing.JFrame {
                 btn_pesquisar_codigo_produtoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_pesquisar_codigo_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 100, 60));
+        getContentPane().add(btn_pesquisar_codigo_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 100, 60));
 
         txt_valor_unitario_produto.setFocusable(false);
         getContentPane().add(txt_valor_unitario_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 120, -1));
@@ -281,6 +300,11 @@ public class frm_venda extends javax.swing.JFrame {
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, 170, 120));
 
         btn_pontos_descontos.setText("Usar Pontos");
+        btn_pontos_descontos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pontos_descontosActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_pontos_descontos, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 440, -1, -1));
 
         btn_buscar_codigo_cliente.setText("Buscar Cliente");
@@ -419,6 +443,10 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_codigo_cliente.setText("Código do Cliente");
         getContentPane().add(lbl_codigo_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 220, -1, -1));
 
+        lbl_desconto.setText("Valor");
+        lbl_desconto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_desconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, 40, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -459,6 +487,11 @@ public class frm_venda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro! Código Inválido!\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_buscar_codigo_clienteActionPerformed
+
+    private void btn_pontos_descontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pontos_descontosActionPerformed
+        // TODO add your handling code here:
+        usar_pontos_desconto();
+    }//GEN-LAST:event_btn_pontos_descontosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -508,6 +541,7 @@ public class frm_venda extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_codigo_cliente;
     private javax.swing.JLabel lbl_codigo_produto;
     private javax.swing.JLabel lbl_data_venda;
+    private javax.swing.JLabel lbl_desconto;
     private javax.swing.JLabel lbl_descricao_produto;
     private javax.swing.JLabel lbl_funcionario;
     private javax.swing.JLabel lbl_hora_venda;
