@@ -77,7 +77,7 @@ public class frm_venda extends javax.swing.JFrame {
             lbl_pontos_cliente.setText("Pontos: " + banco.resultset.getString(2));
             
             // Regra de Negócio, cada ponto vale R$ 1,00 de desconto
-            lbl_valor_desconto_cliente.setText("Desconto R$: " + banco.resultset.getString(2) + ",00");
+            lbl_desconto.setText(banco.resultset.getString(2));
             
         }catch(SQLException e){
             // Se algo der errado, limpar o código do cliente e mostrar mensagem de erro
@@ -98,7 +98,7 @@ public class frm_venda extends javax.swing.JFrame {
         totalinicial =  Integer.parseInt(lbl_valor_venda.getText());
         desconto = Integer.parseInt(lbl_desconto.getText());
         totalfinal = totalinicial-desconto;
-        
+        System.out.println(totalfinal);
         // Passa o valor com desconto no lbl
         lbl_valor_venda.setText(Integer.toString(totalfinal));
         
@@ -159,6 +159,7 @@ public class frm_venda extends javax.swing.JFrame {
         tabela_lista_produto = new javax.swing.JTable();
         lbl_codigo_cliente = new javax.swing.JLabel();
         lbl_desconto = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -443,9 +444,14 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_codigo_cliente.setText("Código do Cliente");
         getContentPane().add(lbl_codigo_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 220, -1, -1));
 
-        lbl_desconto.setText("Valor");
-        lbl_desconto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lbl_desconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, 40, -1));
+        lbl_desconto.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_desconto.setText("00");
+        lbl_desconto.setToolTipText("");
+        lbl_desconto.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(lbl_desconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 410, 30, -1));
+
+        jLabel2.setText(",00");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 410, 30, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -537,6 +543,7 @@ public class frm_venda extends javax.swing.JFrame {
     private javax.swing.JButton btn_voltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lbl_codigo_cliente;
     private javax.swing.JLabel lbl_codigo_produto;
