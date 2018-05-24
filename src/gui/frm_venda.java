@@ -17,6 +17,9 @@ public class frm_venda extends javax.swing.JFrame {
     
     // Criar uma tabela para receber os dados
     DefaultTableModel tabela_modelo = new DefaultTableModel();
+    
+    // Variável para receber o valor da venda
+    double valor_total = 0;
         
     // Construtor
     public frm_venda() {
@@ -163,17 +166,31 @@ public class frm_venda extends javax.swing.JFrame {
             
             // Adicionar o vetor com as informações a tabela
             tabela_lista_produto.setModel(tabela_modelo);
+            
+            // Calcular o valor da venda
+            calcular_valor_total();
           
         } catch(Exception e){
             // Se algo der errado, mostrar mensagem de erro
             JOptionPane.showMessageDialog(null, "Erro! Comando inválido\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
     }
     
     // Método calcular_valor_total - Mostra o valor total da venda a cada produto que foi inserido
     public void calcular_valor_total(){
-        
+        try {
+            // Somar o valor de cada item ao valor total
+            for (int i = 0; i < tabela_lista_produto.getRowCount(); i++) {
+                valor_total += Double.parseDouble(tabela_lista_produto.getValueAt(i,5) + "");
+                
+                // Mostrar o valor total
+                lbl_valor_venda.setText(Double.toString(valor_total));
+            }
+        }
+        catch(Exception e){
+            // Se algo der errado, mostrar mensagem de erro
+            JOptionPane.showMessageDialog(null, "Erro! Comando inválido\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
             
             
@@ -225,8 +242,8 @@ public class frm_venda extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_total_palavra.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        lbl_total_palavra.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_total_palavra.setText("Total: R$");
+        lbl_total_palavra.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_total_palavra.setText("Total R$");
         getContentPane().add(lbl_total_palavra, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 130, 40));
 
         txt_observacoes_venda.setForeground(new java.awt.Color(204, 204, 204));
@@ -248,10 +265,10 @@ public class frm_venda extends javax.swing.JFrame {
         getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, -1, -1));
 
         lbl_valor_venda.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        lbl_valor_venda.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_valor_venda.setForeground(new java.awt.Color(0, 0, 0));
         lbl_valor_venda.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_valor_venda.setText("00,00");
-        getContentPane().add(lbl_valor_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 600, 90, 40));
+        getContentPane().add(lbl_valor_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 600, 200, 40));
 
         lbl_codigo_produto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_codigo_produto.setForeground(new java.awt.Color(51, 102, 255));
