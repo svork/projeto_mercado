@@ -9,6 +9,9 @@ public class frm_venda extends javax.swing.JFrame {
 
     // Instancia da classe de Conexão
     Banco banco;
+    
+    // Variável inteira para guardar o número do item na venda
+    int numero_item = 0;
 
     // Construtor
     public frm_venda() {
@@ -23,6 +26,7 @@ public class frm_venda extends javax.swing.JFrame {
         // Campos que não devem ser alterados, somente leitura
         txt_descricao_produto.setEditable(false);
         txt_valor_unitario_produto.setEditable(false);
+        txt_ponto_produto.setEditable(false);
         
     }
 
@@ -40,7 +44,7 @@ public class frm_venda extends javax.swing.JFrame {
     public void buscar_produto(int codigo){
         try{
             //Comando SQL
-            String comando = "select descricao_pro, preco_pro from produto where codigo_pro = " + codigo;
+            String comando = "select descricao_pro, preco_pro, ponto_pro from produto where codigo_pro = " + codigo;
             
             // Executar comando SQL
             banco.executeSQL(comando);
@@ -51,6 +55,7 @@ public class frm_venda extends javax.swing.JFrame {
             // Mostrar informações nos campos Descricao e Valor do Produto
             txt_descricao_produto.setText(banco.resultset.getString(1));
             txt_valor_unitario_produto.setText(banco.resultset.getString(2));
+            txt_ponto_produto.setText(banco.resultset.getString(3));
             
         }catch(SQLException e){
             // Se algo der errado, limpar o código do produto e mostrar mensagem de erro
@@ -87,30 +92,75 @@ public class frm_venda extends javax.swing.JFrame {
     }
     
     // Método usar_pontos_desconto - Usa os pontos do cliente para dar desconto no valor total
-    // Falta testar
     public void usar_pontos_desconto(){
+        try {
+            // Armazena o codigo pesquisado em uma variável
+            String codigo = txt_codigo_cliente.getText();
         
-        // Armazena o codigo pesquisado em uma variável
-        String codigo = txt_codigo_cliente.getText();
+            // Declaração de variáveis e calculo de desconto
+            int totalinicial, desconto, totalfinal = 0;
         
-        // Declaração de variáveis e calculo de desconto
-        int totalinicial, desconto, totalfinal;
-        totalinicial =  Integer.parseInt(lbl_valor_venda.getText());
-        desconto = Integer.parseInt(lbl_desconto.getText());
-        totalfinal = totalinicial-desconto;
-        System.out.println(totalfinal);
-        // Passa o valor com desconto no lbl
-        lbl_valor_venda.setText(Integer.toString(totalfinal));
+            // Receber o valor totalinicial e o desconto
+            totalinicial =  Integer.parseInt(lbl_valor_venda.getText());
+            desconto = Integer.parseInt(lbl_desconto.getText());
+            
+            // Cálculo do Desconto, Total menos o desconto
+            totalfinal = totalinicial - desconto;
+            System.out.println(totalfinal);
         
-        // Update no banco referente a atualização depois de usar os pontos
-        String comando = "update cliente, set ponto_cli = 0 , where ponto_cli = " + codigo;
-        // Executar comando SQL
-        banco.executeSQL(comando);
+            // Passa o valor com desconto no lbl
+            lbl_valor_venda.setText(Integer.toString(totalfinal));
+        
+            // Update no banco referente a atualização depois de usar os pontos
+            String comando = "update cliente, set ponto_cli = 0 , where ponto_cli = " + codigo;
+        
+            // Executar comando SQL
+            banco.executeSQL(comando);
+        
+        } catch(Exception e){
+            // Se algo der errado, mostrar mensagem de erro
+            JOptionPane.showMessageDialog(null, "Erro! Comando inválido\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
         
     }
     
     // Método incluir_produto_tabela - Insere o produto que foi buscado na tabela de produtos
     public void incluir_produto_tabela(){
+        try {
+            // Vetor de Strings para guardar os valores
+            String [] produto = new String[6];
+        
+            // Guardar os valores na tabela
+            produto[0] = Integer.toString(numero_item); // Número do produto na lista
+            produto[1] = txt_quantidade_produto.getText(); // Quantidade do produto que foi comprada
+            produto[2] = txt_ponto_produto.getText(); // Pontos de Desconto do produto
+            produto[3] = txt_descricao_produto.getText(); // Descrição do produto
+            produto[4] = txt_valor_unitario_produto.getText(); // Valor unitário do produto
+            
+            // Sub-total é calculado multiplicando a quantidade do produto pelo seu valor unitario
+            produto[5] = Double.toString(Double.parseDouble(produto[1]) * Double.parseDouble(produto[4]));
+        
+            // Incrementar o número do item
+            numero_item ++;
+            
+            // Adicionar o vetor com as informações a tabela
+            tabela_lista_produto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {produto[0], produto[1], produto[2], produto[3], produto[4], produto[5],},
+            },
+            new String [] {
+                "ITEM", "QTDE", "PONTOS", "PRODUTO", "VLR UNIT R$", "SUB-TOTAL"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+        });
+          
+        } catch(Exception e){
+            // Se algo der errado, mostrar mensagem de erro
+            JOptionPane.showMessageDialog(null, "Erro! Comando inválido\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
         
     }
     
@@ -160,6 +210,8 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_codigo_cliente = new javax.swing.JLabel();
         lbl_desconto = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txt_ponto_produto = new javax.swing.JTextField();
+        lbl_ponto_produto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -202,12 +254,12 @@ public class frm_venda extends javax.swing.JFrame {
         lbl_valor_unitario_produto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_valor_unitario_produto.setForeground(new java.awt.Color(51, 102, 255));
         lbl_valor_unitario_produto.setText("Valor unitário R$");
-        getContentPane().add(lbl_valor_unitario_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
+        getContentPane().add(lbl_valor_unitario_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         lbl_quantidade_produto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_quantidade_produto.setForeground(new java.awt.Color(51, 102, 255));
         lbl_quantidade_produto.setText("Quantidade");
-        getContentPane().add(lbl_quantidade_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(lbl_quantidade_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
 
         lbl_descricao_produto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_descricao_produto.setForeground(new java.awt.Color(51, 102, 255));
@@ -267,8 +319,10 @@ public class frm_venda extends javax.swing.JFrame {
         getContentPane().add(btn_pesquisar_codigo_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 100, 60));
 
         txt_valor_unitario_produto.setFocusable(false);
-        getContentPane().add(txt_valor_unitario_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 120, -1));
-        getContentPane().add(txt_quantidade_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 80, -1));
+        getContentPane().add(txt_valor_unitario_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 120, -1));
+
+        txt_quantidade_produto.setText("0");
+        getContentPane().add(txt_quantidade_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 80, -1));
         getContentPane().add(txt_codigo_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 120, -1));
 
         btn_confirmar.setBackground(new java.awt.Color(0, 204, 0));
@@ -295,6 +349,11 @@ public class frm_venda extends javax.swing.JFrame {
         btn_incluir_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/botao1.png"))); // NOI18N
         btn_incluir_produto.setText("Incluir");
         btn_incluir_produto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_incluir_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_incluir_produtoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_incluir_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 100, 60));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar5.png"))); // NOI18N
@@ -324,105 +383,6 @@ public class frm_venda extends javax.swing.JFrame {
 
         tabela_lista_produto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -452,6 +412,14 @@ public class frm_venda extends javax.swing.JFrame {
 
         jLabel2.setText(",00");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 410, 30, -1));
+
+        txt_ponto_produto.setFocusable(false);
+        getContentPane().add(txt_ponto_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 120, -1));
+
+        lbl_ponto_produto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl_ponto_produto.setForeground(new java.awt.Color(51, 102, 255));
+        lbl_ponto_produto.setText("Pontos");
+        getContentPane().add(lbl_ponto_produto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -498,6 +466,11 @@ public class frm_venda extends javax.swing.JFrame {
         // TODO add your handling code here:
         usar_pontos_desconto();
     }//GEN-LAST:event_btn_pontos_descontosActionPerformed
+
+    private void btn_incluir_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_incluir_produtoActionPerformed
+        // TODO add your handling code here:
+        incluir_produto_tabela();
+    }//GEN-LAST:event_btn_incluir_produtoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -554,6 +527,7 @@ public class frm_venda extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_hora_venda;
     private javax.swing.JLabel lbl_nome_cliente;
     private javax.swing.JLabel lbl_numero_venda;
+    private javax.swing.JLabel lbl_ponto_produto;
     private javax.swing.JLabel lbl_pontos_cliente;
     private javax.swing.JLabel lbl_pontos_cliente_cabecalho;
     private javax.swing.JLabel lbl_quantidade_produto;
@@ -569,6 +543,7 @@ public class frm_venda extends javax.swing.JFrame {
     private javax.swing.JTextField txt_codigo_produto;
     private javax.swing.JTextField txt_descricao_produto;
     private javax.swing.JTextField txt_observacoes_venda;
+    private javax.swing.JTextField txt_ponto_produto;
     private javax.swing.JTextField txt_quantidade_produto;
     private javax.swing.JTextField txt_valor_unitario_produto;
     // End of variables declaration//GEN-END:variables
