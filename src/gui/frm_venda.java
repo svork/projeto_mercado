@@ -4,6 +4,8 @@ package gui;
 import database.Banco;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class frm_venda extends javax.swing.JFrame {
 
@@ -11,8 +13,11 @@ public class frm_venda extends javax.swing.JFrame {
     Banco banco;
     
     // Variável inteira para guardar o número do item na venda
-    int numero_item = 0;
-
+    int numero_item = 1;
+    
+    // Criar uma tabela para receber os dados
+    DefaultTableModel tabela_modelo = new DefaultTableModel();
+        
     // Construtor
     public frm_venda() {
         initComponents();
@@ -27,6 +32,16 @@ public class frm_venda extends javax.swing.JFrame {
         txt_descricao_produto.setEditable(false);
         txt_valor_unitario_produto.setEditable(false);
         txt_ponto_produto.setEditable(false);
+        
+            
+        // Adicionar colunas
+        tabela_modelo.addColumn("ITEM");
+        tabela_modelo.addColumn("QTDE");
+        tabela_modelo.addColumn("PONTOS");
+        tabela_modelo.addColumn("DESCRICAO");
+        tabela_modelo.addColumn("VLR UNIT R$");
+        tabela_modelo.addColumn("SUBTOTAL");
+            
         
     }
 
@@ -144,18 +159,10 @@ public class frm_venda extends javax.swing.JFrame {
             numero_item ++;
             
             // Adicionar o vetor com as informações a tabela
-            tabela_lista_produto.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {produto[0], produto[1], produto[2], produto[3], produto[4], produto[5],},
-            },
-            new String [] {
-                "ITEM", "QTDE", "PONTOS", "PRODUTO", "VLR UNIT R$", "SUB-TOTAL"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-        });
+            tabela_modelo.addRow(produto);
+            
+            // Adicionar o vetor com as informações a tabela
+            tabela_lista_produto.setModel(tabela_modelo);
           
         } catch(Exception e){
             // Se algo der errado, mostrar mensagem de erro
