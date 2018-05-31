@@ -11,7 +11,7 @@ public class Banco {
     final private String url = "jdbc:mysql://localhost:3306/projeto_mercado";
     final private String driver = "com.mysql.jdbc.Driver";
     final private String user = "root";
-    final private String password = "root";
+    final private String password = "";
     private Connection connection;
     public Statement statement;
     public ResultSet resultset;   
@@ -50,5 +50,14 @@ public class Banco {
             JOptionPane.showMessageDialog(null,"Erro ao executar o commando SQL: "+ sqlex,"Erro",JOptionPane.ERROR_MESSAGE);            
         }        
     }
-
+    
+    public void executeUpdate(String sql){
+        try{
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            int rs = statement.executeUpdate(sql);
+        }
+        catch (SQLException sqlex){            
+            JOptionPane.showMessageDialog(null,"Deu ruim: "+ sqlex,"Erro",JOptionPane.ERROR_MESSAGE);            
+        }     
+    }
 }

@@ -113,27 +113,27 @@ public class frm_venda extends javax.swing.JFrame {
     public void usar_pontos_desconto(){
         try {
             // Armazena o codigo pesquisado em uma variável
-            String codigo = txt_codigo_cliente.getText();
+            int codigo = Integer.parseInt(txt_codigo_cliente.getText());
         
             // Declaração de variáveis e calculo de desconto
-            int totalinicial, desconto, totalfinal = 0;
+            double totalinicial, desconto, totalfinal = 0;
         
             // Receber o valor totalinicial e o desconto
-            totalinicial =  Integer.parseInt(lbl_valor_venda.getText());
-            desconto = Integer.parseInt(lbl_desconto.getText());
+            totalinicial =  Double.parseDouble(lbl_valor_venda.getText());
+            desconto = Double.parseDouble(lbl_desconto.getText());
             
             // Cálculo do Desconto, Total menos o desconto
             totalfinal = totalinicial - desconto;
-            System.out.println(totalfinal);
+            System.out.println(codigo);
         
             // Passa o valor com desconto no lbl
-            lbl_valor_venda.setText(Integer.toString(totalfinal));
+            lbl_valor_venda.setText(Double.toString(totalfinal));
         
             // Update no banco referente a atualização depois de usar os pontos
-            String comando = "update cliente, set ponto_cli = 0 , where ponto_cli = " + codigo;
+            String comando = "update cliente set ponto_cli = 0 where codigo_cli = " + codigo+";";
         
             // Executar comando SQL
-            banco.executeSQL(comando);
+            banco.executeUpdate(comando);
         
         } catch(Exception e){
             // Se algo der errado, mostrar mensagem de erro
