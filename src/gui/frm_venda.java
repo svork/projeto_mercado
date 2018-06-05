@@ -242,7 +242,6 @@ public class frm_venda extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_total_palavra.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        lbl_total_palavra.setForeground(new java.awt.Color(0, 0, 0));
         lbl_total_palavra.setText("Total R$");
         getContentPane().add(lbl_total_palavra, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 130, 40));
 
@@ -265,7 +264,6 @@ public class frm_venda extends javax.swing.JFrame {
         getContentPane().add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, -1, -1));
 
         lbl_valor_venda.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        lbl_valor_venda.setForeground(new java.awt.Color(0, 0, 0));
         lbl_valor_venda.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_valor_venda.setText("00,00");
         getContentPane().add(lbl_valor_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 600, 200, 40));
@@ -355,6 +353,11 @@ public class frm_venda extends javax.swing.JFrame {
         btn_confirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/botao4.png"))); // NOI18N
         btn_confirmar.setText("Confirmar");
         btn_confirmar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 600, 150, 40));
 
         lbl_rodape_venda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/bar4.png"))); // NOI18N
@@ -495,6 +498,27 @@ public class frm_venda extends javax.swing.JFrame {
         // TODO add your handling code here:
         incluir_produto_tabela();
     }//GEN-LAST:event_btn_incluir_produtoActionPerformed
+
+    private void btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmarActionPerformed
+        // Esse botão chama o form de pagamento
+        try {
+            // Variável desconto
+            int desconto = 0;
+            
+            // Somar o valor de cada item ao valor total
+            for (int i = 0; i < tabela_lista_produto.getRowCount(); i++) {
+                desconto += Double.parseDouble(tabela_lista_produto.getValueAt(i,2) + "");                
+            }
+            // Passar valores para o formulario
+            new frm_forma_pagamento(valor_total, desconto).setVisible(true);
+        }
+        catch(Exception e){
+            // Se algo der errado, mostrar mensagem de erro
+            JOptionPane.showMessageDialog(null, "Erro! Comando inválido\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_btn_confirmarActionPerformed
 
     /**
      * @param args the command line arguments
