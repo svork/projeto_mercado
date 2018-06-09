@@ -1,6 +1,8 @@
 
 package gui;
 
+import javax.swing.JOptionPane;
+
 public class frm_forma_pagamento extends javax.swing.JFrame {
 
     public frm_forma_pagamento(double valor_compra, int quantidade_pontos_desconto) {
@@ -33,16 +35,22 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pagamento");
         setBackground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_finalizar.setForeground(new java.awt.Color(255, 255, 255));
         btn_finalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/botao4.png"))); // NOI18N
         btn_finalizar.setText("Finalizar");
         btn_finalizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_finalizarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 150, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Dinheiro", "2 - Cartão de Crédito", "3 - Cartão de Débito", "4 - Vale Alimentação" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 100, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 170, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Forma de Pagamento");
@@ -71,7 +79,14 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
         getContentPane().add(lbl_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 220, 30));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
+        JOptionPane.showMessageDialog(null, "Venda realizada com sucesso", "Vendas", JOptionPane.INFORMATION_MESSAGE);
+        new frm_principal().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_finalizarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -511,6 +511,7 @@ public class frm_venda extends javax.swing.JFrame {
             }
             // Passar valores para o formulario
             new frm_forma_pagamento(valor_total, desconto).setVisible(true);
+            this.dispose();
         }
         catch(Exception e){
             // Se algo der errado, mostrar mensagem de erro
