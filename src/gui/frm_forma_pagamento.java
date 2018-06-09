@@ -21,60 +21,54 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         btn_finalizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbl_desconto = new javax.swing.JLabel();
+        lbl_1 = new javax.swing.JLabel();
+        lbl_2 = new javax.swing.JLabel();
+        lbl_3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pagamento");
+        setBackground(new java.awt.Color(0, 0, 0));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Escolha a forma de pagamento");
-
+        btn_finalizar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_finalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/botao4.png"))); // NOI18N
         btn_finalizar.setText("Finalizar");
+        btn_finalizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 150, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Dinheiro", "2 - Cartão de Crédito", "3 - Cartão de Débito", "4 - Vale Alimentação" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 100, -1));
 
-        jLabel2.setText("Valor da Compra: R$");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setText("Forma de Pagamento");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Valor da Compra: R$ 00,00");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        lbl_desconto.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lbl_desconto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_desconto.setText("Você ganhou XXX pontos com esta compra");
+        lbl_desconto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_desconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 130, 260, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(btn_finalizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(lbl_desconto)))))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(31, 31, 31)
-                .addComponent(lbl_desconto)
-                .addGap(29, 29, 29)
-                .addComponent(btn_finalizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lbl_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lbl_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/template4.png"))); // NOI18N
+        getContentPane().add(lbl_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 220));
+
+        lbl_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/btn2.png"))); // NOI18N
+        getContentPane().add(lbl_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 150, 20));
+
+        lbl_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/btn3.png"))); // NOI18N
+        getContentPane().add(lbl_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 220, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,6 +113,9 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbl_1;
+    private javax.swing.JLabel lbl_2;
+    private javax.swing.JLabel lbl_3;
     private javax.swing.JLabel lbl_desconto;
     // End of variables declaration//GEN-END:variables
 }
