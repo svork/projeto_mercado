@@ -1,17 +1,62 @@
 
 package gui;
 
+// Importando bibliotecas
+import database.Banco;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class frm_forma_pagamento extends javax.swing.JFrame {
+    
+    // Instancia da classe de Conexão
+    Banco banco;
+    
+    int codigo_cliente = 0;
 
-    public frm_forma_pagamento(double valor_compra, int quantidade_pontos_desconto) {
+    // Construtor
+    public frm_forma_pagamento(double valor_compra, int quantidade_pontos_desconto, int codigo_cli) {
         initComponents();
         
+        // Criando objeto da classe Banco
+        banco = new Banco();
+
+        // Abrir conexão com o banco de dados
+        banco.connect();  
+        
         // Mostrar os valores de compra e desconto
-        jLabel2.setText("Valor da Compra: R$ " + valor_compra);
-        lbl_desconto.setText("Você ganhou " + quantidade_pontos_desconto + " pontos com esta compra");
+        lbl_valor_compra.setText("Valor da Compra: R$ " + valor_compra);
+        lbl_desconto.setText("" + quantidade_pontos_desconto);
+        
+        // Receber o código do cliente
+        codigo_cliente = codigo_cli;
                
+    }
+    
+    // Método voltar_menu - volta ao menu principal
+    public void voltar_menu(){
+        // Esse botão volta ao form Principal
+        new frm_principal().setVisible(true);
+        this.dispose();
+        
+        // Fechar a conexão com o banco
+        banco.disconnect();
+    }
+    
+    // Método adicionar_pontos_desconto - adiciona a quantidade de pontos da compra ao perfil do cliente
+    public void adicionar_pontos_desconto() {
+        try{
+            //Comando SQL
+            String comando = "update cliente set ponto_cli = " + Integer.parseInt(lbl_desconto.getText())
+                    + " where codigo_cli =" + codigo_cliente;
+            
+            //String comando = "update cliente set ponto_cli = 10  where codigo_cli = 1";
+            // Executar comando SQL
+            banco.statement.executeUpdate(comando);
+            
+        // Se algo der errado, mostrar mensagem
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao alterar pontos do cliente!\n" + e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -23,10 +68,11 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbl_desconto1 = new javax.swing.JLabel();
         btn_finalizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_valor_compra = new javax.swing.JLabel();
         lbl_desconto = new javax.swing.JLabel();
         lbl_1 = new javax.swing.JLabel();
         lbl_2 = new javax.swing.JLabel();
@@ -37,6 +83,12 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_desconto1.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lbl_desconto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_desconto1.setText("Você ganhou pontos!!");
+        lbl_desconto1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_desconto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 160, -1));
 
         btn_finalizar.setForeground(new java.awt.Color(255, 255, 255));
         btn_finalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Template/botao4.png"))); // NOI18N
@@ -56,11 +108,11 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
         jLabel1.setText("Forma de Pagamento");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Valor da Compra: R$ 00,00");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        lbl_valor_compra.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lbl_valor_compra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_valor_compra.setText("Valor da Compra: R$ 00,00");
+        lbl_valor_compra.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_valor_compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         lbl_desconto.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         lbl_desconto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -83,9 +135,11 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
+        adicionar_pontos_desconto();
+        
+        // Mensagem de Confirmação
         JOptionPane.showMessageDialog(null, "Venda realizada com sucesso", "Vendas", JOptionPane.INFORMATION_MESSAGE);
-        new frm_principal().setVisible(true);
-        this.dispose();
+        voltar_menu();
     }//GEN-LAST:event_btn_finalizarActionPerformed
 
     /**
@@ -118,7 +172,7 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_forma_pagamento(1,1).setVisible(true);
+                new frm_forma_pagamento(1,1,1).setVisible(true);
             }
         });
     }
@@ -127,10 +181,11 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     private javax.swing.JButton btn_finalizar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbl_1;
     private javax.swing.JLabel lbl_2;
     private javax.swing.JLabel lbl_3;
     private javax.swing.JLabel lbl_desconto;
+    private javax.swing.JLabel lbl_desconto1;
+    private javax.swing.JLabel lbl_valor_compra;
     // End of variables declaration//GEN-END:variables
 }

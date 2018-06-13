@@ -510,7 +510,7 @@ public class frm_venda extends javax.swing.JFrame {
                 desconto += Double.parseDouble(tabela_lista_produto.getValueAt(i,2) + "");                
             }
             // Passar valores para o formulario
-            new frm_forma_pagamento(valor_total, desconto).setVisible(true);
+            new frm_forma_pagamento(valor_total, desconto, Integer.parseInt(txt_codigo_cliente.getText())).setVisible(true);
             this.dispose();
         }
         catch(Exception e){
