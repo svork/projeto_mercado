@@ -3,7 +3,7 @@ package gui;
 
 // Importando bibliotecas
 import database.Banco;
-import java.sql.SQLException;
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class frm_forma_pagamento extends javax.swing.JFrame {
@@ -11,7 +11,14 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     // Instancia da classe de Conexão
     Banco banco;
     
+    // Variável Código Cliente
     int codigo_cliente = 0;
+    
+    // Variável descontos
+    int desconto = 0;
+    
+    // Select principal
+    String sql = "select * from cliente";
 
     // Construtor
     public frm_forma_pagamento(double valor_compra, int quantidade_pontos_desconto, int codigo_cli) {
@@ -23,12 +30,26 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
         // Abrir conexão com o banco de dados
         banco.connect();  
         
-        // Mostrar os valores de compra e desconto
-        lbl_valor_compra.setText("Valor da Compra: R$ " + valor_compra);
-        lbl_desconto.setText("" + quantidade_pontos_desconto);
+        // Carregar dados
+        banco.executeSQL(sql);
+        
+        try {
+            // Procura o primeiro registro no banco
+            banco.resultset.first();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados\n" + e, "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        // Receber descontos
+        this.desconto = quantidade_pontos_desconto;
         
         // Receber o código do cliente
-        codigo_cliente = codigo_cli;
+        this.codigo_cliente = codigo_cli;
+        
+        // Mostrar os valores de compra e desconto
+        lbl_valor_compra.setText("Valor da Compra: R$ " + valor_compra);
+        lbl_desconto.setText("" + desconto);
                
     }
     
@@ -46,10 +67,8 @@ public class frm_forma_pagamento extends javax.swing.JFrame {
     public void adicionar_pontos_desconto() {
         try{
             //Comando SQL
-            String comando = "update cliente set ponto_cli = " + Integer.parseInt(lbl_desconto.getText())
-                    + " where codigo_cli =" + codigo_cliente;
+            String comando = "update cliente set ponto_cli = " + desconto + " where codigo_cli = " + codigo_cliente;
             
-            //String comando = "update cliente set ponto_cli = 10  where codigo_cli = 1";
             // Executar comando SQL
             banco.statement.executeUpdate(comando);
             

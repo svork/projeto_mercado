@@ -505,12 +505,16 @@ public class frm_venda extends javax.swing.JFrame {
             // Variável desconto
             int desconto = 0;
             
+            // Variável Código cliente
+            int codigo = 0;
+            codigo = Integer.parseInt(txt_codigo_cliente.getText());
+            
             // Somar o valor de cada item ao valor total
             for (int i = 0; i < tabela_lista_produto.getRowCount(); i++) {
                 desconto += Double.parseDouble(tabela_lista_produto.getValueAt(i,2) + "");                
             }
             // Passar valores para o formulario
-            new frm_forma_pagamento(valor_total, desconto, Integer.parseInt(txt_codigo_cliente.getText())).setVisible(true);
+            new frm_forma_pagamento(valor_total, desconto, codigo).setVisible(true);
             this.dispose();
         }
         catch(Exception e){
